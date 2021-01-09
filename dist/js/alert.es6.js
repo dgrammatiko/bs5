@@ -276,6 +276,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
+window.Joomla.Bootstrap = {};
 window.Joomla.Bootstrap.Alert = Alert;
 
 export default Alert;

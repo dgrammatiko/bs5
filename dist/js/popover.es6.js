@@ -3394,6 +3394,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
+window.Joomla.Bootstrap = {};
 window.Joomla.Bootstrap.Popover = Popover;
 window.Joomla.Bootstrap.Tooltip = Tooltip;
 export default Tooltip;

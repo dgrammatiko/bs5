@@ -582,6 +582,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
+window.Joomla.Bootstrap = {};
 window.Joomla.Bootstrap.Collapse = Collapse;
 
 export default Collapse;

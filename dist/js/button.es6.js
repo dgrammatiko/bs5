@@ -172,6 +172,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
+window.Joomla.Bootstrap = {};
 window.Joomla.Bootstrap.Button = Button;
 
 export default Button;

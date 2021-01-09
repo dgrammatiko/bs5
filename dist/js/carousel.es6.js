@@ -795,6 +795,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
+window.Joomla.Bootstrap = {};
 window.Joomla.Bootstrap.Carousel = Carousel;
 
 export default Carousel;
