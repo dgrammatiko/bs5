@@ -77,10 +77,10 @@ window.Joomla.Bootstrap.Modal = Modal;
 
 export default Modal;`,
 
-
       'export default Popover;': `window.Joomla = window.Joomla || {};
 window.Joomla.Bootstrap.Popover = Popover;
-
+window.Joomla.Bootstrap.Tooltip = Tooltip;
+export default Tooltip;
 export default Popover;`,
 
       'export default Scrollspy;': `window.Joomla = window.Joomla || {};
@@ -128,7 +128,7 @@ const bsPlugins = {
   ScrollSpy: path.resolve(__dirname, 'src/js/scrollspy.js'),
   Tab: path.resolve(__dirname, 'src/js/tab.js'),
   Toast: path.resolve(__dirname, 'src/js/toast.js'),
-  Tooltip: path.resolve(__dirname, 'src/js/tooltip.js')
+  // Tooltip: path.resolve(__dirname, 'src/js/tooltip.js')
 }
 
 const defaultPluginConfig = {
@@ -192,12 +192,12 @@ const getConfigByPluginKey = pluginKey => {
       external: [
         bsPlugins.Data,
         bsPlugins.SelectorEngine,
-        bsPlugins.Tooltip
+        // bsPlugins.Tooltip
       ],
       globals: {
         [bsPlugins.Data]: 'Data',
         [bsPlugins.SelectorEngine]: 'SelectorEngine',
-        [bsPlugins.Tooltip]: 'Tooltip'
+        // [bsPlugins.Tooltip]: 'Tooltip'
       }
     }
   }
