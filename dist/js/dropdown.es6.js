@@ -627,7 +627,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Dropdown = Dropdown;
 
 export default Dropdown;

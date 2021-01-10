@@ -359,7 +359,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Tab = Tab;
 
 export default Tab;

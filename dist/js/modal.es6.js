@@ -784,7 +784,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Modal = Modal;
 
 export default Modal;

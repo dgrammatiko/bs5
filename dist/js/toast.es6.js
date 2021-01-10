@@ -366,7 +366,7 @@ onDOMContentLoaded(() => {
 });
 
 window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Toast = Toast;
 
 export default Toast;

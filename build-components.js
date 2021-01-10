@@ -48,68 +48,68 @@ const plugins = [
 
       // Exports
       'export default Alert;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Alert = Alert;
 
 export default Alert;`,
 
       'export default Button;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Button = Button;
 
 export default Button;`,
 
       'export default Carousel;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Carousel = Carousel;
 
 export default Carousel;`,
 
       'export default Collapse;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Collapse = Collapse;
 
 export default Collapse;`,
 
       'export default Dropdown;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Dropdown = Dropdown;
 
 export default Dropdown;`,
 
       'export default Modal;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Modal = Modal;
 
 export default Modal;`,
 
       'export default Popover;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Popover = Popover;
 window.Joomla.Bootstrap.Tooltip = Tooltip;
 export default Tooltip;
 export default Popover;`,
 
       'export default Scrollspy;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Scrollspy = Scrollspy;
 
 export default Scrollspy;`,
 
       'export default Tab;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Tab = Tab;
 
 export default Tab;`,
 
       'export default Toast;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Toast = Toast;
 
 export default Toast;`,
 
       'export default Tooltip;': `window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = {};
+window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
 window.Joomla.Bootstrap.Tooltip = Tooltip;
 
 export default Tooltip;`,
