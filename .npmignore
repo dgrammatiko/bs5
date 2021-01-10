@@ -1,4 +1,7 @@
 node_modules
+srcX
+XXX_src
+src
 test
 build-components.js
 createFiles.js
