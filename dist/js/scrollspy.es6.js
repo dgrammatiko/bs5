@@ -1,141 +1,4 @@
-import Data from './dom/data.js';
-import EventHandler from './dom/event-handler.js';
-import Manipulator from './dom/manipulator.js';
-import SelectorEngine from './dom/selector-engine.js';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): util/index.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-const MAX_UID = 1000000;
-
-// Shoutout AngusCroll (https://goo.gl/pxwQGp)
-const toType = obj => {
-  if (obj === null || obj === undefined) {
-    return `${obj}`
-  }
-
-  return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
-};
-
-/**
- * --------------------------------------------------------------------------
- * Public Util Api
- * --------------------------------------------------------------------------
- */
-
-const getUID = prefix => {
-  do {
-    prefix += Math.floor(Math.random() * MAX_UID);
-  } while (document.getElementById(prefix))
-
-  return prefix
-};
-
-const getSelector = element => {
-  let selector = element.getAttribute('data-bs-target');
-
-  if (!selector || selector === '#') {
-    const hrefAttr = element.getAttribute('href');
-
-    selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
-  }
-
-  return selector
-};
-
-const getSelectorFromElement = element => {
-  const selector = getSelector(element);
-
-  if (selector) {
-    return document.querySelector(selector) ? selector : null
-  }
-
-  return null
-};
-
-const isElement = obj => (obj[0] || obj).nodeType;
-
-const typeCheckConfig = (componentName, config, configTypes) => {
-  Object.keys(configTypes).forEach(property => {
-    const expectedTypes = configTypes[property];
-    const value = config[property];
-    const valueType = value && isElement(value) ?
-      'element' :
-      toType(value);
-
-    if (!new RegExp(expectedTypes).test(valueType)) {
-      throw new Error(
-        `${componentName.toUpperCase()}: ` +
-        `Option "${property}" provided type "${valueType}" ` +
-        `but expected type "${expectedTypes}".`)
-    }
-  });
-};
-
-const getjQuery = () => {
-  const { jQuery } = window;
-
-  if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return jQuery
-  }
-
-  return null
-};
-
-const onDOMContentLoaded = callback => {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', callback);
-  } else {
-    callback();
-  }
-};
-
-const isRTL = document.documentElement.dir === 'rtl';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): base-component.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-const VERSION = '5.0.0-beta1';
-
-class BaseComponent {
-  constructor(element) {
-    if (!element) {
-      return
-    }
-
-    this._element = element;
-    Data.setData(element, this.constructor.DATA_KEY, this);
-  }
-
-  dispose() {
-    Data.removeData(this._element, this.constructor.DATA_KEY);
-    this._element = null;
-  }
-
-  /** Static */
-
-  static getInstance(element) {
-    return Data.getData(element, this.DATA_KEY)
-  }
-
-  static get VERSION() {
-    return VERSION
-  }
-}
+import { B as BaseComponent, E as EventHandler, S as SelectorEngine, d as getSelectorFromElement, M as Manipulator, f as isElement, k as getUID, c as typeCheckConfig, D as Data, o as onDOMContentLoaded, b as getjQuery } from './dom-8eef6b5f.js';
 
 /**
  * --------------------------------------------------------------------------
@@ -454,4 +317,23 @@ onDOMContentLoaded(() => {
   }
 });
 
-export default ScrollSpy;
+if (window.Joomla) {
+  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
+  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
+  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
+  window.Joomla.Bootstrap.Methods.Scrollspy = ScrollSpy;
+
+  const scrollspys= Joomla.getOptions('bootstrap.scrollspy');
+  if (scrollspys.length) {
+    window.Joomla.Bootstrap.Instances.Scrollspy = new WeakMap();
+    scrollspys.forEach((selector) => {
+      const scrollspy = document.querySelectorAll(selector);
+      if (scrollspy) {
+        const instance = new Joomla.Bootstrap.Methods.Scrollspy(scrollspy);
+        window.Joomla.Bootstrap.Instances.Scrollspy.set(scrollspy, instance);
+      }
+    });
+  }
+}
+
+export { ScrollSpy as S };

@@ -1,142 +1,5 @@
-import * as Popper from './popper/index.js';
-import { createPopper } from './popper/index.js';
-import Data from './dom/data.js';
-import EventHandler from './dom/event-handler.js';
-import Manipulator from './dom/manipulator.js';
-import SelectorEngine from './dom/selector-engine.js';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): util/index.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-// Shoutout AngusCroll (https://goo.gl/pxwQGp)
-const toType = obj => {
-  if (obj === null || obj === undefined) {
-    return `${obj}`
-  }
-
-  return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
-};
-
-const getSelector = element => {
-  let selector = element.getAttribute('data-bs-target');
-
-  if (!selector || selector === '#') {
-    const hrefAttr = element.getAttribute('href');
-
-    selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
-  }
-
-  return selector
-};
-
-const getElementFromSelector = element => {
-  const selector = getSelector(element);
-
-  return selector ? document.querySelector(selector) : null
-};
-
-const isElement = obj => (obj[0] || obj).nodeType;
-
-const typeCheckConfig = (componentName, config, configTypes) => {
-  Object.keys(configTypes).forEach(property => {
-    const expectedTypes = configTypes[property];
-    const value = config[property];
-    const valueType = value && isElement(value) ?
-      'element' :
-      toType(value);
-
-    if (!new RegExp(expectedTypes).test(valueType)) {
-      throw new Error(
-        `${componentName.toUpperCase()}: ` +
-        `Option "${property}" provided type "${valueType}" ` +
-        `but expected type "${expectedTypes}".`)
-    }
-  });
-};
-
-const isVisible = element => {
-  if (!element) {
-    return false
-  }
-
-  if (element.style && element.parentNode && element.parentNode.style) {
-    const elementStyle = getComputedStyle(element);
-    const parentNodeStyle = getComputedStyle(element.parentNode);
-
-    return elementStyle.display !== 'none' &&
-      parentNodeStyle.display !== 'none' &&
-      elementStyle.visibility !== 'hidden'
-  }
-
-  return false
-};
-
-const noop = () => function () {};
-
-const getjQuery = () => {
-  const { jQuery } = window;
-
-  if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return jQuery
-  }
-
-  return null
-};
-
-const onDOMContentLoaded = callback => {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', callback);
-  } else {
-    callback();
-  }
-};
-
-const isRTL = document.documentElement.dir === 'rtl';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): base-component.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-const VERSION = '5.0.0-beta1';
-
-class BaseComponent {
-  constructor(element) {
-    if (!element) {
-      return
-    }
-
-    this._element = element;
-    Data.setData(element, this.constructor.DATA_KEY, this);
-  }
-
-  dispose() {
-    Data.removeData(this._element, this.constructor.DATA_KEY);
-    this._element = null;
-  }
-
-  /** Static */
-
-  static getInstance(element) {
-    return Data.getData(element, this.DATA_KEY)
-  }
-
-  static get VERSION() {
-    return VERSION
-  }
-}
+import { B as BaseComponent, E as EventHandler, f as isElement, n as noop, M as Manipulator, c as typeCheckConfig, S as SelectorEngine, D as Data, g as getElementFromSelector, i as isVisible, o as onDOMContentLoaded, h as isRTL, b as getjQuery } from './dom-8eef6b5f.js';
+import { P as Popper, c as createPopper } from './popper-36774615.js';
 
 /**
  * --------------------------------------------------------------------------
@@ -626,8 +489,23 @@ onDOMContentLoaded(() => {
   }
 });
 
-window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-window.Joomla.Bootstrap.Dropdown = Dropdown;
+if (window.Joomla) {
+  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
+  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
+  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
+  window.Joomla.Bootstrap.Methods.Dropdown = Dropdown;
 
-export default Dropdown;
+  const dropdowns= Joomla.getOptions('bootstrap.dropdown');
+  if (dropdowns.length) {
+    window.Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
+    dropdowns.forEach((selector) => {
+      const dd = document.querySelectorAll(selector);
+      if (dd) {
+        const instance = new Joomla.Bootstrap.Methods.Dropdown(dd);
+        window.Joomla.Bootstrap.Instances.Dropdown.set(dd, instance);
+      }
+    });
+  }
+}
+
+export { Dropdown as D };

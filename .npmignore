@@ -1,10 +1,7 @@
 node_modules
-srcX
-XXX_src
+test_component
 src
-test
-build-components.js
-createFiles.js
-init.js
+build-joomla.js
+final.js
 renovate.json
 README.md

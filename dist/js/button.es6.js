@@ -1,73 +1,4 @@
-import Data from './dom/data.js';
-import EventHandler from './dom/event-handler.js';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): util/index.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-const getjQuery = () => {
-  const { jQuery } = window;
-
-  if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return jQuery
-  }
-
-  return null
-};
-
-const onDOMContentLoaded = callback => {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', callback);
-  } else {
-    callback();
-  }
-};
-
-const isRTL = document.documentElement.dir === 'rtl';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): base-component.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-const VERSION = '5.0.0-beta1';
-
-class BaseComponent {
-  constructor(element) {
-    if (!element) {
-      return
-    }
-
-    this._element = element;
-    Data.setData(element, this.constructor.DATA_KEY, this);
-  }
-
-  dispose() {
-    Data.removeData(this._element, this.constructor.DATA_KEY);
-    this._element = null;
-  }
-
-  /** Static */
-
-  static getInstance(element) {
-    return Data.getData(element, this.DATA_KEY)
-  }
-
-  static get VERSION() {
-    return VERSION
-  }
-}
+import { B as BaseComponent, D as Data, E as EventHandler, o as onDOMContentLoaded, b as getjQuery } from './dom-8eef6b5f.js';
 
 /**
  * --------------------------------------------------------------------------
@@ -171,8 +102,23 @@ onDOMContentLoaded(() => {
   }
 });
 
-window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-window.Joomla.Bootstrap.Button = Button;
+if (window.Joomla) {
+  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
+  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
+  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
+  window.Joomla.Bootstrap.Methods.Button = Button;
 
-export default Button;
+  const buttons= Joomla.getOptions('bootstrap.button');
+  if (buttons.length) {
+    window.Joomla.Bootstrap.Instances.Button = new WeakMap();
+    buttons.forEach((selector) => {
+      const button = document.querySelectorAll(selector);
+      if (button) {
+        const instance = new Joomla.Bootstrap.Methods.Button(button);
+        window.Joomla.Bootstrap.Instances.Button.set(button, instance);
+      }
+    });
+  }
+}
+
+export { Button as B };

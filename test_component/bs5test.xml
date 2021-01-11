@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="4.0" client="site" method="upgrade" element="com_bs5test">
+  <name>Bs5test Component</name>
+  <element>com_bs5test</element>
+  <author>Dimitris Grammatikogiannis</author>
+  <creationDate>9 Jan 2021</creationDate>
+  <copyright>(C) 2021 Dimitris Grammatikogiannis, All Rights Reserved.</copyright>
+  <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+  <authorEmail>d.grammatiko@gmail.com</authorEmail>
+  <authorUrl>https://Dimitris Grammatikogiannis.online</authorUrl>
+  <version>1.0.0</version>
+  <description>A component to test BS5 JS integration!</description>
+  <namespace path="src">Ttc\Component\Bs5test</namespace>
+  <files folder="site">
+  	<folder>src</folder>
+  	<folder>tmpl</folder>
+  </files>
+  <administration>
+		<files folder="admin">
+			<folder>services</folder>
+			<folder>src</folder>
+		</files>
+  </administration>
+</extension>

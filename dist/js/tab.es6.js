@@ -1,141 +1,4 @@
-import Data from './dom/data.js';
-import EventHandler from './dom/event-handler.js';
-import SelectorEngine from './dom/selector-engine.js';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): util/index.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-const MILLISECONDS_MULTIPLIER = 1000;
-const TRANSITION_END = 'transitionend';
-
-const getSelector = element => {
-  let selector = element.getAttribute('data-bs-target');
-
-  if (!selector || selector === '#') {
-    const hrefAttr = element.getAttribute('href');
-
-    selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
-  }
-
-  return selector
-};
-
-const getElementFromSelector = element => {
-  const selector = getSelector(element);
-
-  return selector ? document.querySelector(selector) : null
-};
-
-const getTransitionDurationFromElement = element => {
-  if (!element) {
-    return 0
-  }
-
-  // Get transition-duration of the element
-  let { transitionDuration, transitionDelay } = window.getComputedStyle(element);
-
-  const floatTransitionDuration = Number.parseFloat(transitionDuration);
-  const floatTransitionDelay = Number.parseFloat(transitionDelay);
-
-  // Return 0 if element or transition duration is not found
-  if (!floatTransitionDuration && !floatTransitionDelay) {
-    return 0
-  }
-
-  // If multiple durations are defined, take the first
-  transitionDuration = transitionDuration.split(',')[0];
-  transitionDelay = transitionDelay.split(',')[0];
-
-  return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER
-};
-
-const triggerTransitionEnd = element => {
-  element.dispatchEvent(new Event(TRANSITION_END));
-};
-
-const emulateTransitionEnd = (element, duration) => {
-  let called = false;
-  const durationPadding = 5;
-  const emulatedDuration = duration + durationPadding;
-
-  function listener() {
-    called = true;
-    element.removeEventListener(TRANSITION_END, listener);
-  }
-
-  element.addEventListener(TRANSITION_END, listener);
-  setTimeout(() => {
-    if (!called) {
-      triggerTransitionEnd(element);
-    }
-  }, emulatedDuration);
-};
-
-const reflow = element => element.offsetHeight;
-
-const getjQuery = () => {
-  const { jQuery } = window;
-
-  if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
-    return jQuery
-  }
-
-  return null
-};
-
-const onDOMContentLoaded = callback => {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', callback);
-  } else {
-    callback();
-  }
-};
-
-const isRTL = document.documentElement.dir === 'rtl';
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.0.0-beta1): base-component.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-
-const VERSION = '5.0.0-beta1';
-
-class BaseComponent {
-  constructor(element) {
-    if (!element) {
-      return
-    }
-
-    this._element = element;
-    Data.setData(element, this.constructor.DATA_KEY, this);
-  }
-
-  dispose() {
-    Data.removeData(this._element, this.constructor.DATA_KEY);
-    this._element = null;
-  }
-
-  /** Static */
-
-  static getInstance(element) {
-    return Data.getData(element, this.DATA_KEY)
-  }
-
-  static get VERSION() {
-    return VERSION
-  }
-}
+import { B as BaseComponent, g as getElementFromSelector, S as SelectorEngine, E as EventHandler, a as getTransitionDurationFromElement, T as TRANSITION_END, e as emulateTransitionEnd, r as reflow, D as Data, o as onDOMContentLoaded, b as getjQuery } from './dom-8eef6b5f.js';
 
 /**
  * --------------------------------------------------------------------------
@@ -358,8 +221,23 @@ onDOMContentLoaded(() => {
   }
 });
 
-window.Joomla = window.Joomla || {};
-window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-window.Joomla.Bootstrap.Tab = Tab;
+if (window.Joomla) {
+  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
+  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
+  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
+  window.Joomla.Bootstrap.Methods.Tab = Tab;
 
-export default Tab;
+  const tabs= Joomla.getOptions('bootstrap.tab');
+  if (tabs.length) {
+    window.Joomla.Bootstrap.Instances.Tab = new WeakMap();
+    tabs.forEach((selector) => {
+      const tab = document.querySelectorAll(selector);
+      if (tab) {
+        const instance = new Joomla.Bootstrap.Methods.Tab(tab);
+        window.Joomla.Bootstrap.Instances.Tab.set(tab, instance);
+      }
+    });
+  }
+}
+
+export { Tab as T };
