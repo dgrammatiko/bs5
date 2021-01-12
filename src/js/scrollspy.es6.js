@@ -5,12 +5,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Scrollspy = Scrollspy;
+  window.Joomla.Bootstrap.Instances.Scrollspy = new WeakMap();
 
   const scrollspys= Joomla.getOptions('bootstrap.scrollspy');
 
   if (scrollspys && scrollspys.length) {
-    window.Joomla.Bootstrap.Instances.Scrollspy = new WeakMap();
-
     scrollspys.forEach((selector) => {
       const scrollspy = document.querySelectorAll(selector);
 

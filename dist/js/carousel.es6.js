@@ -616,12 +616,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Carousel = Carousel;
+  window.Joomla.Bootstrap.Instances.Carousel = new WeakMap();
 
   const carousels = Joomla.getOptions('bootstrap.carousel');
 
   if (carousels && carousels.length) {
-    window.Joomla.Bootstrap.Instances.Carousel = new WeakMap();
-
     carousels.forEach((selector, options) => {
       const carousel = document.querySelector(selector);
 

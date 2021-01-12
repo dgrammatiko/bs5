@@ -29,12 +29,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Modal = Modal;
+  window.Joomla.Bootstrap.Instances.Modal = new WeakMap();
 
   const modals = [].slice.call(document.querySelectorAll('.joomla-modal'));
 
   if (modals.length) {
-    window.Joomla.Bootstrap.Instances.Modal = new WeakMap();
-
     modals.forEach((modal) => {
       const instance = new Joomla.Bootstrap.Methods.Modal(modal);
       window.Joomla.Bootstrap.Instances.Modal.set(modal, instance);

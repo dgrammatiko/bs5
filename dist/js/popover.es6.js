@@ -1087,12 +1087,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Popover = Popover;
+  window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
 
   const popovers= Joomla.getOptions('bootstrap.collapse');
 
   if (popovers && popovers.length) {
-    window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
-
     popovers.forEach((selector, options) => {
       const popover = document.querySelector(selector);
 

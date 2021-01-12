@@ -5,11 +5,10 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Tab = Tab;
+  window.Joomla.Bootstrap.Instances.Tab = new WeakMap();
 
   const tabs= Joomla.getOptions('bootstrap.tab');
   if (tabs && tabs.length) {
-    window.Joomla.Bootstrap.Instances.Tab = new WeakMap();
-
     tabs.forEach((selector) => {
       const tab = document.querySelector(selector);
 

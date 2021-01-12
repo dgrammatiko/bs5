@@ -5,12 +5,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Button = Button;
+  window.Joomla.Bootstrap.Instances.Button = new WeakMap();
 
   const buttons = Joomla.getOptions('bootstrap.button');
 
   if (buttons && buttons.length) {
-    window.Joomla.Bootstrap.Instances.Button = new WeakMap();
-
     buttons.forEach((selector) => {
       const button = document.querySelectorAll(selector);
       if (button) {

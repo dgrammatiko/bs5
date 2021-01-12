@@ -5,12 +5,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Toast = Toast;
+  window.Joomla.Bootstrap.Instances.Toast = new WeakMap();
 
   const toasts= Joomla.getOptions('bootstrap.tab');
 
   if (toasts && toasts.length) {
-    window.Joomla.Bootstrap.Instances.Toast = new WeakMap();
-
     toasts.forEach((selector) => {
       const toast = document.querySelectorAll(selector);
 

@@ -410,12 +410,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Collapse = Collapse;
+  window.Joomla.Bootstrap.Instances.Collapse = new WeakMap();
 
   const collapses= Joomla.getOptions('bootstrap.collapse');
 
   if (collapses && collapses.length) {
-    window.Joomla.Bootstrap.Instances.Collapse = new WeakMap();
-
     collapses.forEach((selector, options) => {
       const collapse = document.querySelector(selector);
 

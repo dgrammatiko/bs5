@@ -494,12 +494,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Dropdown = Dropdown;
+  window.Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
 
   const dropdowns= Joomla.getOptions('bootstrap.dropdown');
 
   if (dropdowns && dropdowns.length) {
-    window.Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
-
     dropdowns.forEach((selector, options) => {
       const dropdown = document.querySelector(selector);
 
