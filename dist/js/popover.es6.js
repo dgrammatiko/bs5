@@ -1089,7 +1089,7 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Popover = Popover;
   window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
 
-  const popovers= Joomla.getOptions('bootstrap.collapse');
+  const popovers= Joomla.getOptions('bootstrap.popover');
 
   if (popovers && popovers.length) {
     popovers.forEach((selector, options) => {
@@ -1109,16 +1109,21 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Tooltip = Tooltip;
 
-  const tooltips= Joomla.getOptions('bootstrap.tooltip');
-  if (tooltips.length) {
+  if (!window.Joomla.Bootstrap.Instances.Tooltip) {
     window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
-    tooltips.forEach((selector) => {
-      const tooltip = document.querySelectorAll(selector);
-      if (tooltip) {
-        const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltip);
-        window.Joomla.Bootstrap.Instances.Tooltip.set(tooltip, instance);
-      }
-    });
+
+    const tooltips= Joomla.getOptions('bootstrap.tooltip');
+
+    if (tooltips && tooltips.length) {
+      tooltips.forEach((selector, options) => {
+        const tooltip = document.querySelector(selector);
+
+        if (tooltip) {
+          const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltip);
+          window.Joomla.Bootstrap.Instances.Tooltip.set(tooltip, instance);
+        }
+      });
+    }
   }
 }
 

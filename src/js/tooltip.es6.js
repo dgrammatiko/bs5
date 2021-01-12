@@ -6,17 +6,20 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Tooltip = Tooltip;
 
-  const tooltips= Joomla.getOptions('bootstrap.tooltip');
+  if (!window.Joomla.Bootstrap.Instances.Tooltip) {
+    window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
+    const tooltips= Joomla.getOptions('bootstrap.tooltip');
 
-  if (tooltips && tooltips.length) {
-    tooltips.forEach((selector, options) => {
-      const tooltip = document.querySelector(selector);
+    if (tooltips && tooltips.length) {
+      tooltips.forEach((selector, options) => {
+        const tooltip = document.querySelector(selector);
 
-      if (tooltip) {
-        const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltip);
-        window.Joomla.Bootstrap.Instances.Tooltip.set(tooltip, instance);
-      }
-    });
+        if (tooltip) {
+          const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltip);
+          window.Joomla.Bootstrap.Instances.Tooltip.set(tooltip, instance);
+        }
+      });
+    }
   }
 }
 

@@ -225,7 +225,7 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Toast = Toast;
   window.Joomla.Bootstrap.Instances.Toast = new WeakMap();
 
-  const toasts= Joomla.getOptions('bootstrap.tab');
+  const toasts= Joomla.getOptions('bootstrap.toast');
 
   if (toasts && toasts.length) {
     toasts.forEach((selector) => {
