@@ -18,7 +18,6 @@
   <administration>
     <files folder="admin">
       <folder>services</folder>
-      <folder>src</folder>
     </files>
   </administration>
 </extension>
