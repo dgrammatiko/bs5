@@ -414,21 +414,15 @@ if (window.Joomla) {
 
   const collapses= Joomla.getOptions('bootstrap.collapse');
 
-  if (collapses && collapses.length) {
-    collapses.forEach((selector, options) => {
-      const collapse = document.querySelector(selector);
+  if (collapses) {
+    for (const collapse in collapses) {
+      const collapseElement = document.querySelector(collapse);
 
-      if (collapse) {
-        const instance = new Joomla.Bootstrap.Methods.Collapse(
-          collapse,
-          {
-            parent: options.parent,
-            toggle: options.toggle
-          });
-
+      if (collapseElement) {
+        const instance = new Joomla.Bootstrap.Methods.Collapse(collapseElement, collapses[collapse]);
         window.Joomla.Bootstrap.Instances.Collapse.set(collapse, instance);
       }
-    });
+    }
   }
 }
 

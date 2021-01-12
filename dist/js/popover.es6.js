@@ -1091,15 +1091,15 @@ if (window.Joomla) {
 
   const popovers= Joomla.getOptions('bootstrap.popover');
 
-  if (popovers && popovers.length) {
-    popovers.forEach((selector, options) => {
-      const popover = document.querySelector(selector);
+  if (popovers) {
+    for (const popover in popovers) {
+      const popoverElement = document.querySelector(popover);
 
-      if (popover) {
-        const instance = new Joomla.Bootstrap.Methods.Popover(popover, options);
-        window.Joomla.Bootstrap.Instances.Popover.set(popover, instance);
+      if (popoverElement) {
+        const instance = new Joomla.Bootstrap.Methods.Popover(popoverElement, popovers[popover]);
+        window.Joomla.Bootstrap.Instances.Popover.set(popoverElement, instance);
       }
-    });
+    }
   }
 }
 
@@ -1111,18 +1111,17 @@ if (window.Joomla) {
 
   if (!window.Joomla.Bootstrap.Instances.Tooltip) {
     window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
-
     const tooltips= Joomla.getOptions('bootstrap.tooltip');
 
-    if (tooltips && tooltips.length) {
-      tooltips.forEach((selector, options) => {
-        const tooltip = document.querySelector(selector);
+    if (tooltips) {
+      for (const tooltip in tooltips) {
+        const tooltipElement = document.querySelector(tooltip);
 
-        if (tooltip) {
-          const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltip);
-          window.Joomla.Bootstrap.Instances.Tooltip.set(tooltip, instance);
+        if (tooltipElement) {
+          const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltipElement, tooltips[tooltip]);
+          window.Joomla.Bootstrap.Instances.Tooltip.set(tooltipElement, instance);
         }
-      });
+      }
     }
   }
 }

@@ -498,20 +498,15 @@ if (window.Joomla) {
 
   const dropdowns= Joomla.getOptions('bootstrap.dropdown');
 
-  if (dropdowns && dropdowns.length) {
-    dropdowns.forEach((selector, options) => {
-      const dropdown = document.querySelector(selector);
+  if (dropdowns) {
+    for (const dropdown in dropdowns) {
+      const dropdownElement = document.querySelector(dropdown);
 
-      if (dropdown) {
-        const instance = new Joomla.Bootstrap.Methods.Dropdown(
-          dropdown,
-          {
-            // @todo options?
-          });
-
+      if (dropdownElement) {
+        const instance = new Joomla.Bootstrap.Methods.Dropdown(dropdownElement, dropdowns[dropdown]);
         window.Joomla.Bootstrap.Instances.Dropdown.set(dropdown, instance);
       }
-    });
+    }
   }
 }
 

@@ -227,15 +227,15 @@ if (window.Joomla) {
 
   const toasts= Joomla.getOptions('bootstrap.toast');
 
-  if (toasts && toasts.length) {
-    toasts.forEach((selector) => {
-      const toast = document.querySelectorAll(selector);
+  if (toasts) {
+    for (const toast in toasts) {
+      const toastElement = document.querySelector(toast);
 
-      if (toast) {
-        const instance = new Joomla.Bootstrap.Methods.Toast(toast);
-        window.Joomla.Bootstrap.Instances.Toast.set(toast, instance);
+      if (toastElement) {
+        const instance = new Joomla.Bootstrap.Methods.Toast(toastElement, toasts[toast]);
+        window.Joomla.Bootstrap.Instances.Toast.set(toastElement, instance);
       }
-    });
+    }
   }
 }
 
