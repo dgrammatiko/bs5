@@ -1096,7 +1096,7 @@ if (window.Joomla) {
       const popoverElements = Array.from(document.querySelectorAll(popover));
 
       if (popoverElements.length) {
-        popoverElements.map((el) => window.Joomla.Bootstrap.Instances.Popover.set(popoverElement, new Joomla.Bootstrap.Methods.Popover(el, popovers[popover])));
+        popoverElements.map((el) => window.Joomla.Bootstrap.Instances.Popover.set(el, new Joomla.Bootstrap.Methods.Popover(el, popovers[popover])));
       }
     });
   }
