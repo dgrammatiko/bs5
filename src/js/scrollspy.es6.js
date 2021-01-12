@@ -9,15 +9,15 @@ if (window.Joomla) {
 
   const scrollspys= Joomla.getOptions('bootstrap.scrollspy');
 
-  if (scrollspys && scrollspys.length) {
-    scrollspys.forEach((selector) => {
-      const scrollspy = document.querySelectorAll(selector);
+  if (scrollspys) {
+    for (const scrollspy in scrollspys) {
+      const scrollspyElement = document.querySelector(scrollspy);
 
-      if (scrollspy) {
-        const instance = new Joomla.Bootstrap.Methods.Scrollspy(scrollspy);
-        window.Joomla.Bootstrap.Instances.Scrollspy.set(scrollspy, instance);
+      if (scrollspyElement) {
+        const instance = new Joomla.Bootstrap.Methods.Scrollspy(scrollspyElement, scrollspys[scrollspy]);
+        window.Joomla.Bootstrap.Instances.Scrollspy.set(scrollspyElement, instance);
       }
-    });
+    }
   }
 }
 
