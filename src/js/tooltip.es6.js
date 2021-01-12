@@ -11,13 +11,13 @@ if (window.Joomla) {
     const tooltips= Joomla.getOptions('bootstrap.tooltip');
 
     if (tooltips) {
-      for (const tooltip in tooltips) {
-        const tooltipElements = document.querySelectorAll(tooltip);
+      Object.keys(tooltips).forEach((tooltip) => {
+        const tooltipElements = Array.from(document.querySelectorAll(tooltip));
 
         if (tooltipElements.length) {
           tooltipElements.map((el) => window.Joomla.Bootstrap.Instances.Tooltip.set(el, new Joomla.Bootstrap.Methods.Tooltip(el, tooltips[tooltip])));
         }
-      }
+      });
     }
   }
 }

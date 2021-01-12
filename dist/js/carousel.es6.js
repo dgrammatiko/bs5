@@ -621,8 +621,8 @@ if (window.Joomla) {
   const carousels = Joomla.getOptions('bootstrap.carousel');
 
   if (carousels) {
-    for (const carousel in carousels) {
-      const carouselElements = document.querySelectorAll(carousel);
+    Object.keys(carousels).forEach((carousel) => {
+      const carouselElements = Array.from(document.querySelectorAll(carousel));
       const options = {
         interval: carousels[carousel].interval ? carousels[carousel].interval : 5000,
         pause: carousels[carousel].pause ? carousels[carousel].pause : 'hover',
@@ -631,7 +631,7 @@ if (window.Joomla) {
       if (carouselElements) {
         carouselElementa.map((el) => window.Joomla.Bootstrap.Instances.Carousel.set(el, new Joomla.Bootstrap.Methods.Carousel(el, options)));
       }
-    }
+    });
   }
 }
 

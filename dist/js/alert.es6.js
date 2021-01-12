@@ -152,10 +152,9 @@ if (window.Joomla) {
 
   if (alerts && alerts.length) {
     alerts.forEach((selector) => {
-      const alert = document.querySelectorAll(selector);
-      if (alert) {
-        const instance = new Joomla.Bootstrap.Methods.Alert(alert);
-        window.Joomla.Bootstrap.Instances.Alert.set(alert, instance);
+      const alertElements = Array.from(document.querySelectorAll(selector));
+      if (alertElements.length) {
+        alertElements.map((el) => window.Joomla.Bootstrap.Instances.Alert.set(el, new Joomla.Bootstrap.Methods.Alert(el)));
       }
     });
   }

@@ -415,13 +415,13 @@ if (window.Joomla) {
   const collapses= Joomla.getOptions('bootstrap.collapse');
 
   if (collapses) {
-    for (const collapse in collapses) {
-      const collapseElements = document.querySelectorAll(collapse);
+    Object.keys(collapses).forEach((collapse) => {
+      const collapseElements = Array.from(document.querySelectorAll(collapse));
 
       if (collapseElements) {
         collapseElements.map((el) => window.Joomla.Bootstrap.Instances.Collapse.set(el, new Joomla.Bootstrap.Methods.Collapse(el, collapses[collapse])));
       }
-    }
+    });
   }
 }
 

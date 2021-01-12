@@ -10,13 +10,13 @@ if (window.Joomla) {
   const toasts= Joomla.getOptions('bootstrap.toast');
 
   if (toasts) {
-    for (const toast in toasts) {
-      const toastElements = document.querySelectorAll(toast);
+    Object.keys(toasts).forEach((toast) => {
+      const toastElements = Array.from(document.querySelectorAll(toast));
 
       if (toastElements) {
         toastElements.map((el) => window.Joomla.Bootstrap.Instances.Toast.set(el, new Joomla.Bootstrap.Methods.Toast(el, toasts[toast])));
       }
-    }
+    });
   }
 }
 

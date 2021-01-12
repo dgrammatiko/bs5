@@ -11,13 +11,13 @@ if (window.Joomla) {
   const popovers= Joomla.getOptions('bootstrap.popover');
 
   if (popovers) {
-    for (const popover in popovers) {
-      const popoverElements = document.querySelectorAll(popover);
+    Object.keys(popovers).forEach((popover) => {
+      const popoverElements = Array.from(document.querySelectorAll(popover));
 
-      if (popoverElements) {
+      if (popoverElements.length) {
         popoverElements.map((el) => window.Joomla.Bootstrap.Instances.Popover.set(popoverElement, new Joomla.Bootstrap.Methods.Popover(el, popovers[popover])));
       }
-    }
+    });
   }
 }
 
@@ -32,14 +32,13 @@ if (window.Joomla) {
     const tooltips= Joomla.getOptions('bootstrap.tooltip');
 
     if (tooltips) {
-      for (const tooltip in tooltips) {
-        const tooltipElement = document.querySelector(tooltip);
+      Object.keys(tooltips).forEach((tooltip) => {
+        const tooltipElements = Array.from(document.querySelectorAll(tooltip));
 
-        if (tooltipElement) {
-          const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltipElement, tooltips[tooltip]);
-          window.Joomla.Bootstrap.Instances.Tooltip.set(tooltipElement, instance);
+        if (tooltipElements.length) {
+          tooltipElements.map((el) => window.Joomla.Bootstrap.Instances.Tooltip.set(el, new Joomla.Bootstrap.Methods.Tooltip(el, tooltips[tooltip])));
         }
-      }
+      });
     }
   }
 }

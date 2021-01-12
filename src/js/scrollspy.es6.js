@@ -10,13 +10,13 @@ if (window.Joomla) {
   const scrollspys= Joomla.getOptions('bootstrap.scrollspy');
 
   if (scrollspys) {
-    for (const scrollspy in scrollspys) {
-      const scrollspyElements = document.querySelector(scrollspy);
+      Object.keys(scrollspys).forEach((scrollspy) => {
+      const scrollspyElements = Array.from(document.querySelector(scrollspy));
 
       if (scrollspyElements.length) {
         scrollspyElements.map((el) => window.Joomla.Bootstrap.Instances.Scrollspy.set(el, new Joomla.Bootstrap.Methods.Scrollspy(el, scrollspys[scrollspy])));
       }
-    }
+    });
   }
 }
 

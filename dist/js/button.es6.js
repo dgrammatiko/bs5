@@ -113,10 +113,9 @@ if (window.Joomla) {
 
   if (buttons && buttons.length) {
     buttons.forEach((selector) => {
-      const button = document.querySelectorAll(selector);
-      if (button) {
-        const instance = new Joomla.Bootstrap.Methods.Button(button);
-        window.Joomla.Bootstrap.Instances.Button.set(button, instance);
+      const buttonElements = Array.from(document.querySelectorAll(selector));
+      if (buttonElements.length) {
+        buttonElements.map((el) => window.Joomla.Bootstrap.Instances.Button.set(el, new Joomla.Bootstrap.Methods.Button(el)));
       }
     });
   }
