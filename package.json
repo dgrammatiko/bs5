@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node build-joomla.js && node final.js"
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/dgrammatiko/bs5#readme",
   "dependencies": {
+    "@popperjs/core": "^2.6.0",
     "bootstrap": "^5.0.0-beta1",
-    "@popperjs/core": "^2.6.0"
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "7.12.10",

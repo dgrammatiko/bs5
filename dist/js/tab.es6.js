@@ -229,7 +229,7 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Instances.Tab = new WeakMap();
 
   const tabs= Joomla.getOptions('bootstrap.tab');
-console.log(tabs);
+
   if (tabs) {
     for (const tabSelector in tabs) {
       const nSelector = tabSelector.split('.')[1];
@@ -237,7 +237,7 @@ console.log(tabs);
 
       if (tab) {
         const related = Array.from(tab.children);
-console.log(related.length);
+
         // Build the navigation
         if (related.length) {
           related.forEach((element) => {
@@ -247,7 +247,7 @@ console.log(related.length);
 
             const isActive = element.dataset.active !== '' ? true : false;
             const ul = document.querySelector(`#${nSelector}Tabs`);
-        console.log(ul);
+
             if (ul) {
               const link = document.createElement('a');
               link.href = `#${element.dataset.id}`;

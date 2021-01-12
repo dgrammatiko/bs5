@@ -5,10 +5,8 @@ Testing a build sustem for BS5
 Steps
 - `npm install` Install BS + popper + rollup + ...
 
-- `node init.js` Copy files to `src`
+- `npm build` Do the rollup thingy
 
-- `node build-components.js` Do the rollup thingy
-
-- ESM files at dist
+- ESM files at dist/js
 
 @todo: the leeeeeegacy part
