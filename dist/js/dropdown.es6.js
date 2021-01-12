@@ -499,12 +499,11 @@ if (window.Joomla) {
   const dropdowns= Joomla.getOptions('bootstrap.dropdown');
 
   if (dropdowns) {
-    Object.keys(dropdowns).forEach((dropdown) => {
+    dropdowns.forEach((dropdown) => {
       const dropdownElement = document.querySelector(dropdown);
 
       if (dropdownElement) {
-        const instance = new Joomla.Bootstrap.Methods.Dropdown(dropdownElement, dropdowns[dropdown]);
-        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdown, instance);
+        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdown, new Joomla.Bootstrap.Methods.Dropdown(dropdownElement));
       }
     });
   }
