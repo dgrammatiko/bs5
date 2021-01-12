@@ -416,11 +416,10 @@ if (window.Joomla) {
 
   if (collapses) {
     for (const collapse in collapses) {
-      const collapseElement = document.querySelector(collapse);
+      const collapseElements = document.querySelectorAll(collapse);
 
-      if (collapseElement) {
-        const instance = new Joomla.Bootstrap.Methods.Collapse(collapseElement, collapses[collapse]);
-        window.Joomla.Bootstrap.Instances.Collapse.set(collapse, instance);
+      if (collapseElements) {
+        collapseElements.map((el) => window.Joomla.Bootstrap.Instances.Collapse.set(el, new Joomla.Bootstrap.Methods.Collapse(el, collapses[collapse])));
       }
     }
   }

@@ -229,11 +229,10 @@ if (window.Joomla) {
 
   if (toasts) {
     for (const toast in toasts) {
-      const toastElement = document.querySelector(toast);
+      const toastElements = document.querySelectorAll(toast);
 
-      if (toastElement) {
-        const instance = new Joomla.Bootstrap.Methods.Toast(toastElement, toasts[toast]);
-        window.Joomla.Bootstrap.Instances.Toast.set(toastElement, instance);
+      if (toastElements) {
+        toastElements.map((el) => window.Joomla.Bootstrap.Instances.Toast.set(el, new Joomla.Bootstrap.Methods.Toast(el, toasts[toast])));
       }
     }
   }

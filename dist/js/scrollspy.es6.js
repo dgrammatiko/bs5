@@ -328,11 +328,10 @@ if (window.Joomla) {
 
   if (scrollspys) {
     for (const scrollspy in scrollspys) {
-      const scrollspyElement = document.querySelector(scrollspy);
+      const scrollspyElements = document.querySelector(scrollspy);
 
-      if (scrollspyElement) {
-        const instance = new Joomla.Bootstrap.Methods.Scrollspy(scrollspyElement, scrollspys[scrollspy]);
-        window.Joomla.Bootstrap.Instances.Scrollspy.set(scrollspyElement, instance);
+      if (scrollspyElements.length) {
+        scrollspyElements.map((el) => window.Joomla.Bootstrap.Instances.Scrollspy.set(el, new Joomla.Bootstrap.Methods.Scrollspy(el, scrollspys[scrollspy])));
       }
     }
   }

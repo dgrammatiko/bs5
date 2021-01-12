@@ -12,11 +12,10 @@ if (window.Joomla) {
 
     if (tooltips) {
       for (const tooltip in tooltips) {
-        const tooltipElement = document.querySelector(tooltip);
+        const tooltipElements = document.querySelectorAll(tooltip);
 
-        if (tooltipElement) {
-          const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltipElement, tooltips[tooltip]);
-          window.Joomla.Bootstrap.Instances.Tooltip.set(tooltipElement, instance);
+        if (tooltipElements.length) {
+          tooltipElements.map((el) => window.Joomla.Bootstrap.Instances.Tooltip.set(el, new Joomla.Bootstrap.Methods.Tooltip(el, tooltips[tooltip])));
         }
       }
     }

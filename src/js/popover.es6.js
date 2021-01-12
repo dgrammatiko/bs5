@@ -12,11 +12,10 @@ if (window.Joomla) {
 
   if (popovers) {
     for (const popover in popovers) {
-      const popoverElement = document.querySelector(popover);
+      const popoverElements = document.querySelectorAll(popover);
 
-      if (popoverElement) {
-        const instance = new Joomla.Bootstrap.Methods.Popover(popoverElement, popovers[popover]);
-        window.Joomla.Bootstrap.Instances.Popover.set(popoverElement, instance);
+      if (popoverElements) {
+        popoverElements.map((el) => window.Joomla.Bootstrap.Instances.Popover.set(popoverElement, new Joomla.Bootstrap.Methods.Popover(el, popovers[popover])));
       }
     }
   }
