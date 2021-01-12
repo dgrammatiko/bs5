@@ -108,9 +108,11 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
   window.Joomla.Bootstrap.Methods.Button = Button;
 
-  const buttons= Joomla.getOptions('bootstrap.button');
-  if (buttons.length) {
+  const buttons = Joomla.getOptions('bootstrap.button');
+
+  if (buttons && buttons.length) {
     window.Joomla.Bootstrap.Instances.Button = new WeakMap();
+
     buttons.forEach((selector) => {
       const button = document.querySelectorAll(selector);
       if (button) {

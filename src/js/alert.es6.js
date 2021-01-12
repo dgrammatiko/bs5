@@ -7,8 +7,10 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Alert = Alert;
 
   const alerts = Joomla.getOptions('bootstrap.alert');
-  if (alerts.length) {
+
+  if (alerts && alerts.length) {
     window.Joomla.Bootstrap.Instances.Alert = new WeakMap();
+
     alerts.forEach((selector) => {
       const alert = document.querySelectorAll(selector);
       if (alert) {

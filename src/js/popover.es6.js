@@ -8,12 +8,15 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Popover = Popover;
 
   const popovers= Joomla.getOptions('bootstrap.collapse');
-  if (popovers.length) {
-    window.Joomla.Bootstrap.Instances.collapse = new WeakMap();
-    popovers.forEach((selector) => {
-      const popover = document.querySelectorAll(selector);
+
+  if (popovers && popovers.length) {
+    window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
+
+    popovers.forEach((selector, options) => {
+      const popover = document.querySelector(selector);
+
       if (popover) {
-        const instance = new Joomla.Bootstrap.Methods.Popover(popover);
+        const instance = new Joomla.Bootstrap.Methods.Popover(popover, options);
         window.Joomla.Bootstrap.Instances.Popover.set(popover, instance);
       }
     });

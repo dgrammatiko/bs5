@@ -1,5 +1,5 @@
 import { B as BaseComponent, E as EventHandler, f as isElement, n as noop, M as Manipulator, c as typeCheckConfig, S as SelectorEngine, D as Data, g as getElementFromSelector, i as isVisible, o as onDOMContentLoaded, h as isRTL, b as getjQuery } from './dom-8eef6b5f.js';
-import { P as Popper, c as createPopper } from './popper-36774615.js';
+import { P as Popper, c as createPopper } from './popper-5304749a.js';
 
 /**
  * --------------------------------------------------------------------------
@@ -496,13 +496,21 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Dropdown = Dropdown;
 
   const dropdowns= Joomla.getOptions('bootstrap.dropdown');
-  if (dropdowns.length) {
+
+  if (dropdowns && dropdowns.length) {
     window.Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
-    dropdowns.forEach((selector) => {
-      const dd = document.querySelectorAll(selector);
-      if (dd) {
-        const instance = new Joomla.Bootstrap.Methods.Dropdown(dd);
-        window.Joomla.Bootstrap.Instances.Dropdown.set(dd, instance);
+
+    dropdowns.forEach((selector, options) => {
+      const dropdown = document.querySelector(selector);
+
+      if (dropdown) {
+        const instance = new Joomla.Bootstrap.Methods.Dropdown(
+          dropdown,
+          {
+            // @todo options?
+          });
+
+        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdown, instance);
       }
     });
   }

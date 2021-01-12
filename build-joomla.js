@@ -1,8 +1,13 @@
 const rollup = require('rollup')
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
+
 
 const plugins = [
-nodeResolve()
+nodeResolve(),
+replace({
+  'process.env.NODE_ENV': '\'production\''
+})
 ];
 
 const bsPlugins = {

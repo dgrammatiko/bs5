@@ -228,10 +228,12 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Tab = Tab;
 
   const tabs= Joomla.getOptions('bootstrap.tab');
-  if (tabs.length) {
+  if (tabs && tabs.length) {
     window.Joomla.Bootstrap.Instances.Tab = new WeakMap();
+
     tabs.forEach((selector) => {
-      const tab = document.querySelectorAll(selector);
+      const tab = document.querySelector(selector);
+
       if (tab) {
         const instance = new Joomla.Bootstrap.Methods.Tab(tab);
         window.Joomla.Bootstrap.Instances.Tab.set(tab, instance);

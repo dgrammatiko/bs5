@@ -7,13 +7,21 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Dropdown = Dropdown;
 
   const dropdowns= Joomla.getOptions('bootstrap.dropdown');
-  if (dropdowns.length) {
+
+  if (dropdowns && dropdowns.length) {
     window.Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
-    dropdowns.forEach((selector) => {
-      const dd = document.querySelectorAll(selector);
-      if (dd) {
-        const instance = new Joomla.Bootstrap.Methods.Dropdown(dd);
-        window.Joomla.Bootstrap.Instances.Dropdown.set(dd, instance);
+
+    dropdowns.forEach((selector, options) => {
+      const dropdown = document.querySelector(selector);
+
+      if (dropdown) {
+        const instance = new Joomla.Bootstrap.Methods.Dropdown(
+          dropdown,
+          {
+            // @todo options?
+          });
+
+        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdown, instance);
       }
     });
   }

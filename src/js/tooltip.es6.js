@@ -7,10 +7,12 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Tooltip = Tooltip;
 
   const tooltips= Joomla.getOptions('bootstrap.tooltip');
-  if (tooltips.length) {
+
+  if (tooltips && tooltips.length) {
     window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
-    tooltips.forEach((selector) => {
-      const tooltip = document.querySelectorAll(selector);
+
+    tooltips.forEach((selector, options) => {
+      const tooltip = document.querySelector(selector);
       if (tooltip) {
         const instance = new Joomla.Bootstrap.Methods.Tooltip(tooltip);
         window.Joomla.Bootstrap.Instances.Tooltip.set(tooltip, instance);

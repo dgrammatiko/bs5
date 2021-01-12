@@ -1,5 +1,5 @@
 import { o as onDOMContentLoaded, B as BaseComponent, D as Data, E as EventHandler, j as findShadowRoot, k as getUID, n as noop, a as getTransitionDurationFromElement, T as TRANSITION_END, e as emulateTransitionEnd, S as SelectorEngine, f as isElement, M as Manipulator, c as typeCheckConfig, b as getjQuery, h as isRTL } from './dom-8eef6b5f.js';
-import { P as Popper, c as createPopper } from './popper-36774615.js';
+import { P as Popper, c as createPopper } from './popper-5304749a.js';
 
 /**
  * --------------------------------------------------------------------------
@@ -1089,12 +1089,15 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Popover = Popover;
 
   const popovers= Joomla.getOptions('bootstrap.collapse');
-  if (popovers.length) {
-    window.Joomla.Bootstrap.Instances.collapse = new WeakMap();
-    popovers.forEach((selector) => {
-      const popover = document.querySelectorAll(selector);
+
+  if (popovers && popovers.length) {
+    window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
+
+    popovers.forEach((selector, options) => {
+      const popover = document.querySelector(selector);
+
       if (popover) {
-        const instance = new Joomla.Bootstrap.Methods.Popover(popover);
+        const instance = new Joomla.Bootstrap.Methods.Popover(popover, options);
         window.Joomla.Bootstrap.Instances.Popover.set(popover, instance);
       }
     });

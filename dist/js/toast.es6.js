@@ -225,10 +225,13 @@ if (window.Joomla) {
   window.Joomla.Bootstrap.Methods.Toast = Toast;
 
   const toasts= Joomla.getOptions('bootstrap.tab');
-  if (toasts.length) {
+
+  if (toasts && toasts.length) {
     window.Joomla.Bootstrap.Instances.Toast = new WeakMap();
+
     toasts.forEach((selector) => {
       const toast = document.querySelectorAll(selector);
+
       if (toast) {
         const instance = new Joomla.Bootstrap.Methods.Toast(toast);
         window.Joomla.Bootstrap.Instances.Toast.set(toast, instance);
