@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-  <layout title="Bs5test Component" option="start">
+  <layout title="Bs5test Component" option="home">
     <message>
       <![CDATA[Render an bs5test component page]]>
     </message>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Bs5test Joomla Component
- *
- * @copyright  Copyright (C) 2021 Dimitris Grammatikogiannis. All rights reserved.
- * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- */
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Dispatcher\ComponentDispatcherFactoryInterface;
@@ -23,30 +17,30 @@ use Joomla\DI\ServiceProviderInterface;
  */
 return new class implements ServiceProviderInterface
 {
-	/**
-	 * Registers the service provider with a DI container.
-	 *
-	 * @param   Container  $container  The DI container.
-	 *
-	 * @return  void
-	 *
-	 * @since   4.0.0
-	 */
-	public function register(Container $container)
-	{
-		$container->registerServiceProvider(new MVCFactory('\\Ttc\\Component\\Bs5test'));
-		$container->registerServiceProvider(new ComponentDispatcherFactory('\\Ttc\\Component\\Bs5test'));
+  /**
+   * Registers the service provider with a DI container.
+   *
+   * @param   Container  $container  The DI container.
+   *
+   * @return  void
+   *
+   * @since   4.0.0
+   */
+  public function register(Container $container)
+  {
+    $container->registerServiceProvider(new MVCFactory('\\Ttc\\Component\\Bs5test'));
+    $container->registerServiceProvider(new ComponentDispatcherFactory('\\Ttc\\Component\\Bs5test'));
 
-		$container->set(
-			ComponentInterface::class,
-			function (Container $container)
-			{
-				$component = new MVCComponent($container->get(ComponentDispatcherFactoryInterface::class));
+    $container->set(
+      ComponentInterface::class,
+      function (Container $container)
+      {
+        $component = new MVCComponent($container->get(ComponentDispatcherFactoryInterface::class));
 
-				$component->setMVCFactory($container->get(MVCFactoryInterface::class));
+        $component->setMVCFactory($container->get(MVCFactoryInterface::class));
 
-				return $component;
-			}
-		);
-	}
+        return $component;
+      }
+    );
+  }
 };

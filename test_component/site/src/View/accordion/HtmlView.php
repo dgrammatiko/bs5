@@ -5,7 +5,7 @@
  * @copyright  Copyright (C) 2021 dGrammatiko. All rights reserved.
  * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-namespace Ttc\Component\Bs5test\Site\View\Tab;
+namespace Ttc\Component\Bs5test\Site\View\Accordion;
 
 defined('_JEXEC') or die;
 
@@ -29,7 +29,8 @@ class HtmlView extends BaseHtmlView
    *
    * @since   1.0
    */
-  public function display($tpl = null) {
+  public function display($tpl = null)
+  {
     $app = Factory::getApplication();
 
     $params = $app->getParams();

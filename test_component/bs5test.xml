@@ -12,13 +12,13 @@
   <description>A component to test BS5 JS integration!</description>
   <namespace path="src">Ttc\Component\Bs5test</namespace>
   <files folder="site">
-  	<folder>src</folder>
-  	<folder>tmpl</folder>
+    <folder>src</folder>
+    <folder>tmpl</folder>
   </files>
   <administration>
-		<files folder="admin">
-			<folder>services</folder>
-			<folder>src</folder>
-		</files>
+    <files folder="admin">
+      <folder>services</folder>
+      <folder>src</folder>
+    </files>
   </administration>
 </extension>

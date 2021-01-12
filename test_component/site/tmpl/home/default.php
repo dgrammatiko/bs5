@@ -2,7 +2,7 @@
 /**
  * Bs5test Joomla Component
  *
- * @copyright  Copyright (C) 2021 Dimitris Grammatikogiannis. All rights reserved.
+ * @copyright  Copyright (C) 2021 dGrammatiko. All rights reserved.
  * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die;

@@ -2,7 +2,7 @@
 /**
  * Bs5test Joomla Component
  *
- * @copyright  Copyright (C) 2021 Dimitris Grammatikogiannis. All rights reserved.
+ * @copyright  Copyright (C) 2021 dGrammatiko. All rights reserved.
  * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 defined('_JEXEC') or die;
@@ -13,17 +13,10 @@ use Joomla\CMS\Factory;
 
 include_once __DIR__ . '/../nav.php';
 
-HTMLHelper::_('bootstrap.toast');
+HTMLHelper::_('bootstrap.popover');
 
 ?>
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="toast-header">
-    <img src="..." class="rounded me-2" alt="...">
-    <strong class="me-auto">Bootstrap</strong>
-    <small>11 mins ago</small>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-    Hello, world! This is a toast message.
-  </div>
+
+<div class="bd-example">
+  <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="" data-bs-content="And here's some amazing content. It's very engaging. Right?" data-bs-original-title="Popover title">Click to toggle popover</button>
 </div>
