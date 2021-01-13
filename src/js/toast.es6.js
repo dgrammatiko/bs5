@@ -14,7 +14,7 @@ if (window.Joomla) {
       const toastElements = Array.from(document.querySelectorAll(toast));
 
       if (toastElements) {
-        toastElements.map((el) => window.Joomla.Bootstrap.Instances.Toast.set(el, new Joomla.Bootstrap.Methods.Toast(el, toasts[toast])));
+        toastElements.map((el) => window.Joomla.Bootstrap.Instances.Toast.set(el, new window.Joomla.Bootstrap.Methods.Toast(el, toasts[toast])));
       }
     });
   }

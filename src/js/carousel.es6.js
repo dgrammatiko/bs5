@@ -18,7 +18,7 @@ if (window.Joomla) {
       };
 
       if (carouselElements) {
-        carouselElementa.map((el) => window.Joomla.Bootstrap.Instances.Carousel.set(el, new Joomla.Bootstrap.Methods.Carousel(el, options)));
+        carouselElementa.map((el) => window.Joomla.Bootstrap.Instances.Carousel.set(el, new window.Joomla.Bootstrap.Methods.Carousel(el, options)));
       }
     });
   }

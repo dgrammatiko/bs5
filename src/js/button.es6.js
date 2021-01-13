@@ -14,7 +14,7 @@ if (window.Joomla) {
       const buttonElements = Array.from(document.querySelectorAll(selector));
 
       if (buttonElements.length) {
-        buttonElements.map((el) => window.Joomla.Bootstrap.Instances.Button.set(el, new Joomla.Bootstrap.Methods.Button(el)));
+        buttonElements.map((el) => window.Joomla.Bootstrap.Instances.Button.set(el, new window.Joomla.Bootstrap.Methods.Button(el)));
       }
     });
   }

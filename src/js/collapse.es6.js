@@ -14,7 +14,7 @@ if (window.Joomla) {
       const collapseElement = document.querySelector(collapse);
 
       if (collapseElement) {
-        window.Joomla.Bootstrap.Instances.Collapse.set(collapseElement, new Joomla.Bootstrap.Methods.Collapse(collapseElement));
+        window.Joomla.Bootstrap.Instances.Collapse.set(collapseElement, new window.Joomla.Bootstrap.Methods.Collapse(collapseElement));
       }
     });
   }

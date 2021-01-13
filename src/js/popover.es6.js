@@ -15,7 +15,7 @@ if (window.Joomla) {
       const popoverElements = Array.from(document.querySelectorAll(popover));
 
       if (popoverElements.length) {
-        popoverElements.map((el) => window.Joomla.Bootstrap.Instances.Popover.set(el, new Joomla.Bootstrap.Methods.Popover(el, popovers[popover])));
+        popoverElements.map((el) => window.Joomla.Bootstrap.Instances.Popover.set(el, new window.Joomla.Bootstrap.Methods.Popover(el, popovers[popover])));
       }
     });
   }
@@ -36,7 +36,7 @@ if (window.Joomla) {
         const tooltipElements = Array.from(document.querySelectorAll(tooltip));
 
         if (tooltipElements.length) {
-          tooltipElements.map((el) => window.Joomla.Bootstrap.Instances.Tooltip.set(el, new Joomla.Bootstrap.Methods.Tooltip(el, tooltips[tooltip])));
+          tooltipElements.map((el) => window.Joomla.Bootstrap.Instances.Tooltip.set(el, new window.Joomla.Bootstrap.Methods.Tooltip(el, tooltips[tooltip])));
         }
       });
     }

@@ -8,7 +8,6 @@ import { Popover, Tooltip} from './popover.es6.js';
 import Scrollspy from './scrollspy.es6.js';
 import Tab from './tab.es6.js';
 import Toast from './toast.es6.js';
-// import Tooltip from './tooltip.es6.js';
 
 export {
   Alert,
@@ -21,5 +20,4 @@ export {
   Scrollspy,
   Tab,
   Toast,
-  // Tooltip
 };

@@ -35,8 +35,7 @@ if (window.Joomla) {
 
   if (modals.length) {
     modals.forEach((modal) => {
-      const instance = new Joomla.Bootstrap.Methods.Modal(modal);
-      window.Joomla.Bootstrap.Instances.Modal.set(modal, instance);
+      window.Joomla.Bootstrap.Instances.Modal.set(modal, new window.Joomla.Bootstrap.Methods.Modal(modal));
 
       // Comply with the Joomla API - Bound element.open/close
       modal.open = () => { window.Joomla.Bootstrap.Instances.Modal.get(modal).show(modal); };

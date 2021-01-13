@@ -14,7 +14,7 @@ if (window.Joomla) {
       const dropdownElement = document.querySelector(dropdown);
 
       if (dropdownElement) {
-        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdownElement, new Joomla.Bootstrap.Methods.Dropdown(dropdownElement));
+        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdownElement, new window.Joomla.Bootstrap.Methods.Dropdown(dropdownElement));
       }
     });
   }

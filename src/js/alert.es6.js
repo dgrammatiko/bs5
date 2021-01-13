@@ -13,7 +13,7 @@ if (window.Joomla) {
     alerts.forEach((selector) => {
       const alertElements = Array.from(document.querySelectorAll(selector));
       if (alertElements.length) {
-        alertElements.map((el) => window.Joomla.Bootstrap.Instances.Alert.set(el, new Joomla.Bootstrap.Methods.Alert(el)));
+        alertElements.map((el) => window.Joomla.Bootstrap.Instances.Alert.set(el, new window.Joomla.Bootstrap.Methods.Alert(el)));
       }
     });
   }

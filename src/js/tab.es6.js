@@ -52,8 +52,7 @@ if (window.Joomla) {
           })
         }
 
-        const instance = new Joomla.Bootstrap.Methods.Tab(tab);
-        window.Joomla.Bootstrap.Instances.Tab.set(tab, instance);
+        window.Joomla.Bootstrap.Instances.Tab.set(tab, new window.Joomla.Bootstrap.Methods.Tab(tab));
       }
     }
   }
