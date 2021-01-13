@@ -43,6 +43,12 @@ if (window.Joomla) {
       // Comply with the Joomla API - Set the current Modal ID
       Joomla.Modal.setCurrent(modal);
 
+      // Remove the additional data custom element if exists
+      const addData = ev.target.querySelector('joomla-field-mediamore');
+      if (addData) {
+        addData.parentNode.removeChild(addData);
+      }
+
       if (modal.dataset.url) {
         const modalBody = modal.querySelector('.modal-body');
         const iframe = modalBody.querySelector('iframe');
