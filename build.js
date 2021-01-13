@@ -99,9 +99,6 @@ const build = async plugin => {
       'toast': [
         'src/js/toast.es6.js'
       ],
-      'tooltip': [
-        'src/js/tooltip.es6.js'
-      ],
       'popper': [
         '@popperjs/core'
       ],
