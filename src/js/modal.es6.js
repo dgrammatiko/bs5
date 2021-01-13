@@ -49,26 +49,27 @@ if (window.Joomla) {
         if (modal.dataset.url) {
           const modalBody = modal.querySelector('.modal-body');
           const iframe = modalBody.querySelector('iframe');
-          let el;
 
           if (iframe) {
             iframe.parentNode.removeChild(iframe);
           }
 
+          // @todo merge https://github.com/joomla/joomla-cms/pull/20788
           // Hacks because com_associations and field modals use pure javascript in the url!
           if (modal.dataset.iframe.indexOf("document.getElementById") > 0){
             const iframeTextArr = modal.dataset.iframe.split('+');
             let idFieldArr = iframeTextArr[1].split('"');
+            let el;
 
             idFieldArr[0] = idFieldArr[0].replace(/&quot;/g,'"');
 
             if (!document.getElementById(idFieldArr[1])) {
-              el = document.querySelector(idFieldArr[0]);
+              el = eval(idFieldArr[0]); // This is UNSAFE!!!!
             } else {
               el = document.getElementById(idFieldArr[1]).value;
             }
 
-            modalBody.prepend(`${iframeTextArr[0]}${el}${iframeTextArr[2]}`);
+            modalBody.insertAdjacentHTML('afterbegin', `${iframeTextArr[0]}${el}${iframeTextArr[2]}`);
           } else {
             modalBody.insertAdjacentHTML('afterbegin', modal.dataset.iframe);
           }
