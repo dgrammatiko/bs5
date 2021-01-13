@@ -43,17 +43,17 @@ if (window.Joomla) {
       // Comply with the Joomla API - Set the current Modal ID
       Joomla.Modal.setCurrent(modal);
 
-      // Remove the additional data custom element if exists
-      const addData = ev.target.querySelector('joomla-field-mediamore');
-      if (addData) {
-        addData.parentNode.removeChild(addData);
-      }
-
       if (modal.dataset.url) {
         const modalBody = modal.querySelector('.modal-body');
         const iframe = modalBody.querySelector('iframe');
 
         if (iframe) {
+          const addData = modal.querySelector('joomla-field-mediamore');
+
+          if (addData) {
+            addData.parentNode.removeChild(addData);
+          }
+
           iframe.parentNode.removeChild(iframe);
         }
 
@@ -91,7 +91,7 @@ if (window.Joomla) {
       const modalBodyHeight = parseFloat(getComputedStyle(modalBody, null).height.replace("px", ""));
       const modalFooterHeight = parseFloat(getComputedStyle(modalFooter, null).height.replace("px", ""));
       const padding = modalBody.offsetTop;
-      const maxModalHeight = parseFloat(getComputedStyle(document.body, null).height.replace("px", ""))-(padding * 2)
+      const maxModalHeight = parseFloat(getComputedStyle(document.body, null).height.replace("px", "")) - (padding * 2)
       const modalBodyPadding = modalBodyHeightOuter - modalBodyHeight;
       const maxModalBodyHeight = maxModalHeight - (modalHeaderHeight + modalFooterHeight + modalBodyPadding);
 
