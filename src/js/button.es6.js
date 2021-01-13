@@ -1,11 +1,11 @@
 import Button from '../../node_modules/bootstrap/js/src/button.js'
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Button = Button;
-  window.Joomla.Bootstrap.Instances.Button = new WeakMap();
+if (Joomla) {
+  Joomla.Bootstrap = Joomla.Bootstrap || {};
+  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
+  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+  Joomla.Bootstrap.Methods.Button = Button;
+  Joomla.Bootstrap.Instances.Button = new WeakMap();
 
   const buttons = Joomla.getOptions('bootstrap.button');
 
@@ -14,7 +14,7 @@ if (window.Joomla) {
       const buttonElements = Array.from(document.querySelectorAll(selector));
 
       if (buttonElements.length) {
-        buttonElements.map((el) => window.Joomla.Bootstrap.Instances.Button.set(el, new window.Joomla.Bootstrap.Methods.Button(el)));
+        buttonElements.map((el) => Joomla.Bootstrap.Instances.Button.set(el, new Joomla.Bootstrap.Methods.Button(el)));
       }
     });
   }

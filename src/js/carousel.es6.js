@@ -1,11 +1,11 @@
 import Carousel from '../../node_modules/bootstrap/js/src/carousel.js'
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Carousel = Carousel;
-  window.Joomla.Bootstrap.Instances.Carousel = new WeakMap();
+if (Joomla) {
+  Joomla.Bootstrap = Joomla.Bootstrap || {};
+  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
+  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+  Joomla.Bootstrap.Methods.Carousel = Carousel;
+  Joomla.Bootstrap.Instances.Carousel = new WeakMap();
 
   const carousels = Joomla.getOptions('bootstrap.carousel');
 
@@ -18,7 +18,7 @@ if (window.Joomla) {
       };
 
       if (carouselElements) {
-        carouselElementa.map((el) => window.Joomla.Bootstrap.Instances.Carousel.set(el, new window.Joomla.Bootstrap.Methods.Carousel(el, options)));
+        carouselElementa.map((el) => Joomla.Bootstrap.Instances.Carousel.set(el, new Joomla.Bootstrap.Methods.Carousel(el, options)));
       }
     });
   }

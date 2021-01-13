@@ -1,11 +1,11 @@
 import Dropdown from '../../node_modules/bootstrap/js/src/dropdown.js'
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Dropdown = Dropdown;
-  window.Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
+if (Joomla) {
+  Joomla.Bootstrap = Joomla.Bootstrap || {};
+  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
+  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+  Joomla.Bootstrap.Methods.Dropdown = Dropdown;
+  Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
 
   const dropdowns= Joomla.getOptions('bootstrap.dropdown');
 
@@ -14,7 +14,7 @@ if (window.Joomla) {
       const dropdownElement = document.querySelector(dropdown);
 
       if (dropdownElement) {
-        window.Joomla.Bootstrap.Instances.Dropdown.set(dropdownElement, new window.Joomla.Bootstrap.Methods.Dropdown(dropdownElement));
+        Joomla.Bootstrap.Instances.Dropdown.set(dropdownElement, new Joomla.Bootstrap.Methods.Dropdown(dropdownElement));
       }
     });
   }

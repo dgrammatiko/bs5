@@ -10,7 +10,7 @@ import Modal from '../../node_modules/bootstrap/js/src/modal.js'
  *
  * @since   4.0
  */
-window.Joomla.iframeButtonClick = (options) => {
+Joomla.iframeButtonClick = (options) => {
   if (!options.iframeSelector || !options.buttonSelector) {
     throw new Error('Selector is missing');
   }
@@ -24,19 +24,19 @@ window.Joomla.iframeButtonClick = (options) => {
   }
 };
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Modal = Modal;
-  window.Joomla.Bootstrap.Instances.Modal = new WeakMap();
+if (Joomla) {
+  Joomla.Bootstrap = Joomla.Bootstrap || {};
+  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
+  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+  Joomla.Bootstrap.Methods.Modal = Modal;
+  Joomla.Bootstrap.Instances.Modal = new WeakMap();
 
-  window.Joomla.Bootstrap.Methods.initModal = (modal) => {
-    window.Joomla.Bootstrap.Instances.Modal.set(modal, new window.Joomla.Bootstrap.Methods.Modal(modal));
+  Joomla.Bootstrap.Methods.initModal = (modal) => {
+    Joomla.Bootstrap.Instances.Modal.set(modal, new Joomla.Bootstrap.Methods.Modal(modal));
 
     // Comply with the Joomla API - Bound element.open/close
-    modal.open = () => { window.Joomla.Bootstrap.Instances.Modal.get(modal).show(modal); };
-    modal.close = () => { window.Joomla.Bootstrap.Instances.Modal.get(modal).hide(); };
+    modal.open = () => { Joomla.Bootstrap.Instances.Modal.get(modal).show(modal); };
+    modal.close = () => { Joomla.Bootstrap.Instances.Modal.get(modal).hide(); };
 
     // Do some Joomla specific changes
     modal.addEventListener('show.bs.modal', () => {
@@ -120,7 +120,7 @@ if (window.Joomla) {
   const modals = [].slice.call(document.querySelectorAll('.joomla-modal'));
 
   if (modals.length) {
-    modals.map((modal) => window.Joomla.Bootstrap.Methods.initModal(modal));
+    modals.map((modal) => Joomla.Bootstrap.Methods.initModal(modal));
   }
 }
 

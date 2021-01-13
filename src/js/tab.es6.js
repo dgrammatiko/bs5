@@ -1,11 +1,11 @@
 import Tab from '../../node_modules/bootstrap/js/src/tab.js'
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Tab = Tab;
-  window.Joomla.Bootstrap.Instances.Tab = new WeakMap();
+if (Joomla) {
+  Joomla.Bootstrap = Joomla.Bootstrap || {};
+  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
+  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+  Joomla.Bootstrap.Methods.Tab = Tab;
+  Joomla.Bootstrap.Instances.Tab = new WeakMap();
 
   const tabs= Joomla.getOptions('bootstrap.tab');
 
@@ -52,7 +52,7 @@ if (window.Joomla) {
           })
         }
 
-        window.Joomla.Bootstrap.Instances.Tab.set(tab, new window.Joomla.Bootstrap.Methods.Tab(tab));
+        Joomla.Bootstrap.Instances.Tab.set(tab, new Joomla.Bootstrap.Methods.Tab(tab));
       }
     }
   }
