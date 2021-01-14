@@ -1,23 +1,36 @@
 import Dropdown from '../../node_modules/bootstrap/js/src/dropdown.js'
 
-if (Joomla) {
-  Joomla.Bootstrap = Joomla.Bootstrap || {};
-  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
-  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
-  Joomla.Bootstrap.Methods.Dropdown = Dropdown;
-  Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
+Joomla = Joomla || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
+Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
 
-  const dropdowns= Joomla.getOptions('bootstrap.dropdown');
-
-  if (dropdowns) {
-    dropdowns.forEach((dropdown) => {
-      const dropdownElement = document.querySelector(dropdown);
-
-      if (dropdownElement) {
-        Joomla.Bootstrap.Instances.Dropdown.set(dropdownElement, new Joomla.Bootstrap.Methods.Dropdown(dropdownElement));
-      }
-    });
+/**
+ * Initialise the iteractivity
+ *
+ * @param {HTMLElement} el The element that will become an dropdown
+ * @param {object} options The options for this dropdown
+ */
+Joomla.Bootstrap.Initialise.Dropdown = (el, options) => {
+  if (Joomla.Bootstrap.Instances.Dropdown.get(el)) {
+    el.dispose();
   }
+  Joomla.Bootstrap.Instances.Dropdown.set(el, new Dropdown(el, options));
+};
+
+const dropdowns = Joomla.getOptions('bootstrap.dropdown');
+
+if (dropdowns) {
+  Object.keys(dropdowns).forEach((dropdown) => {
+    const opt = dropdowns[dropdown];
+    const options = {
+      interval: opt.interval ? opt.interval : 5000,
+      pause: opt.pause ? opt.pause : 'hover',
+    };
+
+    Array.from(document.querySelectorAll(dropdown)).map((el) => Joomla.Bootstrap.Initialise.Dropdown(el, options));
+  });
 }
 
 export default Dropdown

@@ -141,23 +141,30 @@ onDOMContentLoaded(() => {
   }
 });
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Alert = Alert;
-  window.Joomla.Bootstrap.Instances.Alert = new WeakMap();
+Joomla = Joomla || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
+Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Alert = new WeakMap();
 
-  const alerts = Joomla.getOptions('bootstrap.alert');
-
-  if (alerts && alerts.length) {
-    alerts.forEach((selector) => {
-      const alertElements = Array.from(document.querySelectorAll(selector));
-      if (alertElements.length) {
-        alertElements.map((el) => window.Joomla.Bootstrap.Instances.Alert.set(el, new window.Joomla.Bootstrap.Methods.Alert(el)));
-      }
-    });
+/**
+ * Initialise the Alert iteractivity
+ *
+ * @param {HTMLElement} el The element that will become an Alert
+ */
+Joomla.Bootstrap.Initialise.Alert = (el) => {
+  if (Joomla.Bootstrap.Instances.Alert.get(el)) {
+    el.dispose();
   }
+  Joomla.Bootstrap.Instances.Alert.set(el, new Alert(el));
+};
+
+const alerts = Joomla.getOptions('bootstrap.alert');
+
+if (alerts && alerts.length) {
+  alerts.map((selector) => {
+    Array.from(document.querySelectorAll(selector)).map((el) => Joomla.Bootstrap.Initialise.Alert(el));
+  });
 }
 
 export { Alert as A };

@@ -611,28 +611,41 @@ onDOMContentLoaded(() => {
   }
 });
 
-if (window.Joomla) {
-  window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
-  window.Joomla.Bootstrap.Methods = window.Joomla.Bootstrap.Methods || {};
-  window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-  window.Joomla.Bootstrap.Methods.Carousel = Carousel;
-  window.Joomla.Bootstrap.Instances.Carousel = new WeakMap();
+Joomla = Joomla || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
+Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Carousel = new WeakMap();
 
-  const carousels = Joomla.getOptions('bootstrap.carousel');
-
-  if (carousels) {
-    Object.keys(carousels).forEach((carousel) => {
-      const carouselElements = Array.from(document.querySelectorAll(carousel));
-      const options = {
-        interval: carousels[carousel].interval ? carousels[carousel].interval : 5000,
-        pause: carousels[carousel].pause ? carousels[carousel].pause : 'hover',
-      };
-
-      if (carouselElements) {
-        carouselElementa.map((el) => window.Joomla.Bootstrap.Instances.Carousel.set(el, new window.Joomla.Bootstrap.Methods.Carousel(el, options)));
-      }
-    });
+/**
+ * Initialise the Carousel iteractivity
+ *
+ * @param {HTMLElement} el The element that will become an Carousel
+ * @param {object} options The options for this carousel
+ */
+Joomla.Bootstrap.Initialise.Carousel = (el, options) => {
+  if (Joomla.Bootstrap.Instances.Carousel.get(el)) {
+    el.dispose();
   }
+  Joomla.Bootstrap.Instances.Carousel.set(el, new Carousel(el, options));
+};
+
+const carousels = Joomla.getOptions('bootstrap.carousel');
+
+if (carousels) {
+  Object.keys(carousels).forEach((carousel) => {
+    const opt = carousels[carousel];
+    const options = {
+      interval: opt.interval ? opt.interval : 5000,
+      keyboard: opt.keyboard ? opt.keyboard : true,
+      pause: opt.pause ? opt.pause : 'hover',
+      slide: opt.slide ? opt.slide : false,
+      wrap: opt.wrap ? opt.wrap : true,
+      touch: opt.touch ? opt.touch : true,
+    };
+
+    Array.from(document.querySelectorAll(carousel)).map((el) => Joomla.Bootstrap.Initialise.Carousel(el, options));
+  });
 }
 
 export { Carousel as C };

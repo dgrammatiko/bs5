@@ -1,23 +1,38 @@
 import Toast from '../../node_modules/bootstrap/js/src/toast.js'
 
-if (Joomla) {
-  Joomla.Bootstrap = Joomla.Bootstrap || {};
-  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
-  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
-  Joomla.Bootstrap.Methods.Toast = Toast;
-  Joomla.Bootstrap.Instances.Toast = new WeakMap();
+Joomla = Joomla || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
+Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Initialise.Toast = initiator;
+Joomla.Bootstrap.Instances.Toast = new WeakMap();
 
-  const toasts= Joomla.getOptions('bootstrap.toast');
-
-  if (toasts) {
-    Object.keys(toasts).forEach((toast) => {
-      const toastElements = Array.from(document.querySelectorAll(toast));
-
-      if (toastElements) {
-        toastElements.map((el) => Joomla.Bootstrap.Instances.Toast.set(el, new Joomla.Bootstrap.Methods.Toast(el, toasts[toast])));
-      }
-    });
+/**
+ * Initialise the iteractivity
+ *
+ * @param {HTMLElement} el The element that will become an toast
+ * @param {object} options The options for this toast
+ */
+Joomla.Bootstrap.Initialise.Toast = (el, options) => {
+  if (Joomla.Bootstrap.Instances.Toast.get(el)) {
+    el.dispose();
   }
+  Joomla.Bootstrap.Instances.Toast.set(el, new Toast(el, options));
+};
+
+const toasts = Joomla.getOptions('bootstrap.toast');
+
+if (toasts) {
+  Object.keys(toasts).map((toast) => {
+    const opt = toasts[toast];
+    const options = {
+      animation: opt.animation ? opt.animation : true,
+      autohide: opt.autohide ? opt.autohide : true,
+      delay: opt.delay ? opt.delay : 5000,
+    };
+
+    Array.from(document.querySelectorAll(toast)).map((el) => Joomla.Bootstrap.Initialise.Toast(el, options));
+  });
 }
 
 export default Toast

@@ -1,23 +1,29 @@
 import Button from '../../node_modules/bootstrap/js/src/button.js'
 
-if (Joomla) {
-  Joomla.Bootstrap = Joomla.Bootstrap || {};
-  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
-  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
-  Joomla.Bootstrap.Methods.Button = Button;
-  Joomla.Bootstrap.Instances.Button = new WeakMap();
+Joomla = Joomla || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
+Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Button = new WeakMap();
 
-  const buttons = Joomla.getOptions('bootstrap.button');
-
-  if (buttons && buttons.length) {
-    buttons.forEach((selector) => {
-      const buttonElements = Array.from(document.querySelectorAll(selector));
-
-      if (buttonElements.length) {
-        buttonElements.map((el) => Joomla.Bootstrap.Instances.Button.set(el, new Joomla.Bootstrap.Methods.Button(el)));
-      }
-    });
+/**
+ * Initialise the Button iteractivity
+ *
+ * @param {HTMLElement} el The element that will become an Button
+ */
+Joomla.Bootstrap.Initialise.Button = (el) => {
+  if (Joomla.Bootstrap.Instances.Button.get(el)) {
+    el.dispose();
   }
+  Joomla.Bootstrap.Instances.Button.set(el, new Button(el));
+};
+
+const buttons = Joomla.getOptions('bootstrap.button');
+
+if (buttons && buttons.length) {
+  buttons.map((selector) => {
+      Array.from(document.querySelectorAll(selector)).map((el) => Joomla.Bootstrap.Initialise.Button(el));
+  });
 }
 
 export default Button

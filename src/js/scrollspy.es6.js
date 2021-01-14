@@ -1,23 +1,37 @@
 import Scrollspy from '../../node_modules/bootstrap/js/src/scrollspy.js'
 
-if (Joomla) {
-  Joomla.Bootstrap = Joomla.Bootstrap || {};
-  Joomla.Bootstrap.Methods = Joomla.Bootstrap.Methods || {};
-  Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
-  Joomla.Bootstrap.Methods.Scrollspy = Scrollspy;
-  Joomla.Bootstrap.Instances.Scrollspy = new WeakMap();
+Joomla = Joomla || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
+Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Scrollspy = new WeakMap();
 
-  const scrollspys= Joomla.getOptions('bootstrap.scrollspy');
-
-  if (scrollspys) {
-      Object.keys(scrollspys).forEach((scrollspy) => {
-      const scrollspyElements = Array.from(document.querySelector(scrollspy));
-
-      if (scrollspyElements.length) {
-        scrollspyElements.map((el) => Joomla.Bootstrap.Instances.Scrollspy.set(el, new Joomla.Bootstrap.Methods.Scrollspy(el, scrollspys[scrollspy])));
-      }
-    });
+/**
+ * Initialise the Scrollspy iteractivity
+ *
+ * @param {HTMLElement} el The element that will become a scrollspy
+ * @param {object} options The options for this scrollspy
+ */
+Joomla.Bootstrap.Initialise.Scrollspy = (el, options) => {
+  if (Joomla.Bootstrap.Instances.Scrollspy.get(el)) {
+    el.dispose();
   }
+  Joomla.Bootstrap.Instances.Scrollspy.set(el, new Scrollspy(el, options));
+};
+
+const scrollspys = Joomla.getOptions('bootstrap.scrollspy');
+
+if (scrollspys) {
+    Object.keys(scrollspys).map((scrollspy) => {
+      const opt = scrollspys[scrollspy];
+      const options = {
+        offset: opt.offset ? opt.offset : 10,
+        method: opt.method ? opt.method : 'auto',
+        method: opt.method ? opt.method : null, // @todo check this again, docs are missing default vaule
+      };
+
+      Array.from(document.querySelector(scrollspy)).map((el) => Joomla.Bootstrap.Initialise.Scrollspy(el, options));
+  });
 }
 
 export default Scrollspy
