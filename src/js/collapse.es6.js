@@ -13,7 +13,7 @@ Joomla.Bootstrap.Instances.Collapse = new WeakMap();
  * @param {object} options The options for this collapse
  */
 Joomla.Bootstrap.Initialise.Collapse = (el, options) => {
-  if (typeof el !== HTMLElement) {
+  if (!(el instanceof Element)) {
     return;
   }
   if (Joomla.Bootstrap.Instances.Collapse.get(el)) {

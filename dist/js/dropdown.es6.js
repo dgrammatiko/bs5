@@ -502,7 +502,7 @@ Joomla.Bootstrap.Instances.Dropdown = new WeakMap();
  * @param {object} options The options for this dropdown
  */
 Joomla.Bootstrap.Initialise.Dropdown = (el, options) => {
-  if (typeof el !== HTMLElement) {
+  if (!(el instanceof Element)) {
     return;
   }
   if (Joomla.Bootstrap.Instances.Dropdown.get(el)) {

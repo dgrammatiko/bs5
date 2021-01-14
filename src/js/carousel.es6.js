@@ -13,7 +13,7 @@ Joomla.Bootstrap.Instances.Carousel = new WeakMap();
  * @param {object} options The options for this carousel
  */
 Joomla.Bootstrap.Initialise.Carousel = (el, options) => {
-  if (typeof el !== HTMLElement) {
+  if (!(el instanceof Element)) {
     return;
   }
   if (Joomla.Bootstrap.Instances.Carousel.get(el)) {

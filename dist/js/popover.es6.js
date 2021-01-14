@@ -1096,7 +1096,7 @@ window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
  * @param {object} options The options for this popover
  */
 Joomla.Bootstrap.Initialise.Popover = (el, options) => {
-  if (typeof el !== HTMLElement) {
+  if (!(el instanceof Element)) {
     return;
   }
   if (Joomla.Bootstrap.Instances.Popover.get(el)) {
