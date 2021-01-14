@@ -61,20 +61,31 @@ Joomla.Bootstrap.Initialise.Modal = (modal, options) => {
     const modalBody = modal.querySelector('.modal-body');
     const modalHeader = modal.querySelector('.modal-header');
     const modalFooter = modal.querySelector('.modal-footer');
-    // const modalRects = modal.getBoundingClientRect();
-    const modalHeaderRects = modalHeader.getBoundingClientRect();
-    // const modalHeight = modalRects.height;
-    const modalHeaderHeight = modalHeaderRects.height;
-    const modalBodyHeightOuter = modalBody.offsetHeight;
-    const modalBodyHeight = parseFloat(getComputedStyle(modalBody, null).height.replace("px", ""));
-    const modalFooterHeight = parseFloat(getComputedStyle(modalFooter, null).height.replace("px", ""));
-    const padding = modalBody.offsetTop;
-    const maxModalHeight = parseFloat(getComputedStyle(document.body, null).height.replace("px", "")) - (padding * 2)
-    const modalBodyPadding = modalBodyHeightOuter - modalBodyHeight;
-    const maxModalBodyHeight = maxModalHeight - (modalHeaderHeight + modalFooterHeight + modalBodyPadding);
+    let modalHeaderHeight = 0;
+    let modalFooterHeight = 0
+    let maxModalBodyHeight = 0;
+    let modalBodyPadding = 0;
+    let modalBodyHeightOuter = 0;
+
+    if (modalBody) {
+      if (modalHeader) {
+        const modalHeaderRects = modalHeader.getBoundingClientRect();
+        modalHeaderHeight = modalHeaderRects.height;
+        modalBodyHeightOuter = modalBody.offsetHeight;
+      }
+      if (modalFooter) {
+        modalFooterHeight = parseFloat(getComputedStyle(modalFooter, null).height.replace("px", ""));
+      }
+
+      const modalBodyHeight = parseFloat(getComputedStyle(modalBody, null).height.replace("px", ""));
+      const padding = modalBody.offsetTop;
+      const maxModalHeight = parseFloat(getComputedStyle(document.body, null).height.replace("px", "")) - (padding * 2)
+      modalBodyPadding = modalBodyHeightOuter - modalBodyHeight;
+      maxModalBodyHeight = maxModalHeight - (modalHeaderHeight + modalFooterHeight + modalBodyPadding);
+    }
 
     if (modal.dataset.url) {
-      const iframeEl = modal.querySelector('.iframe');
+      const iframeEl = modal.querySelector('iframe');
       var iframeHeight = parseFloat(getComputedStyle(iframeEl, null).height.replace("px", ""));
       if (iframeHeight > maxModalBodyHeight){
         modalBody.style.maxHeight = maxModalBodyHeight;
