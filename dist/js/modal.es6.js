@@ -607,9 +607,6 @@ Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
 Joomla.Bootstrap.Instances.Modal = new WeakMap();
 
 Joomla.Bootstrap.Initialise.Modal = (modal, options) => {
-  if (typeof modal !== HTMLElement) {
-    return;
-  }
   if (Joomla.Bootstrap.Instances.Modal.get(modal)) {
     modal.dispose();
   }
@@ -727,7 +724,7 @@ const modals = Joomla.getOptions('bootstrap.modal');
 
 if (modals) {
   Object.keys(modals).forEach((modal) => {
-    console.log(modal, modals[modal]);
+    const modalEl = document.querySelector(modal);
     const opt = modals[modal];
     const options = {
       backdrop: opt.backdrop ? opt.backdrop : true,
@@ -735,7 +732,9 @@ if (modals) {
       focus: opt.focus ? opt.focus : true,
     };
 
-    Joomla.Bootstrap.Initialise.Modal(document.querySelector(modal), options);
+    if (modalEl) {
+      Joomla.Bootstrap.Initialise.Modal(modalEl, options);
+    }
   });
 }
 
