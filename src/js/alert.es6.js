@@ -12,6 +12,9 @@ Joomla.Bootstrap.Instances.Alert = new WeakMap();
  * @param {HTMLElement} el The element that will become an Alert
  */
 Joomla.Bootstrap.Initialise.Alert = (el) => {
+  if (typeof el !== HTMLElement) {
+    return;
+  }
   if (Joomla.Bootstrap.Instances.Alert.get(el)) {
     el.dispose();
   }

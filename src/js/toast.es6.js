@@ -14,6 +14,9 @@ Joomla.Bootstrap.Instances.Toast = new WeakMap();
  * @param {object} options The options for this toast
  */
 Joomla.Bootstrap.Initialise.Toast = (el, options) => {
+  if (typeof el !== HTMLElement) {
+    return;
+  }
   if (Joomla.Bootstrap.Instances.Toast.get(el)) {
     el.dispose();
   }

@@ -7,6 +7,9 @@ Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
 Joomla.Bootstrap.Instances.Modal = new WeakMap();
 
 Joomla.Bootstrap.Initialise.Modal = (modal, options) => {
+  if (typeof modal !== HTMLElement) {
+    return;
+  }
   if (Joomla.Bootstrap.Instances.Modal.get(modal)) {
     modal.dispose();
   }

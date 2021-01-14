@@ -330,6 +330,9 @@ Joomla.Bootstrap.Instances.Scrollspy = new WeakMap();
  * @param {object} options The options for this scrollspy
  */
 Joomla.Bootstrap.Initialise.Scrollspy = (el, options) => {
+  if (typeof el !== HTMLElement) {
+    return;
+  }
   if (Joomla.Bootstrap.Instances.Scrollspy.get(el)) {
     el.dispose();
   }

@@ -12,6 +12,9 @@ Joomla.Bootstrap.Instances.Button = new WeakMap();
  * @param {HTMLElement} el The element that will become an Button
  */
 Joomla.Bootstrap.Initialise.Button = (el) => {
+  if (typeof el !== HTMLElement) {
+    return;
+  }
   if (Joomla.Bootstrap.Instances.Button.get(el)) {
     el.dispose();
   }
