@@ -2,11 +2,11 @@ import Popover from '../../node_modules/bootstrap/js/src/popover.js'
 import Tooltip from '../../node_modules/bootstrap/js/src/tooltip.js'
 
 Joomla = Joomla || {};
-window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
 Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
-window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
-window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Popover = new WeakMap();
+Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
 
 /**
  * Initialise the Popover iteractivity
