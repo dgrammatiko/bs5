@@ -164,6 +164,11 @@ Joomla.Bootstrap.Initialise.Alert = (el) => {
 
 const alerts = Joomla.getOptions('bootstrap.alert');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (alerts && alerts.length) {
   alerts.map((selector) => {
     Array.from(document.querySelectorAll(selector)).map((el) => Joomla.Bootstrap.Initialise.Alert(el));

@@ -736,6 +736,11 @@ Joomla.iframeButtonClick = (options) => {
 // Initialise all the modals
 const modals = Joomla.getOptions('bootstrap.modal');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (modals) {
   Object.keys(modals).forEach((modal) => {
     const modalEl = document.querySelector(modal);

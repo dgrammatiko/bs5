@@ -243,6 +243,11 @@ Joomla.Bootstrap.Initialise.Toast = (el, options) => {
 
 const toasts = Joomla.getOptions('bootstrap.toast');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (toasts) {
   Object.keys(toasts).map((toast) => {
     const opt = toasts[toast];

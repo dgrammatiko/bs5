@@ -23,6 +23,11 @@ Joomla.Bootstrap.Initialise.Button = (el) => {
 
 const buttons = Joomla.getOptions('bootstrap.button');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (buttons && buttons.length) {
   buttons.map((selector) => {
       Array.from(document.querySelectorAll(selector)).map((el) => Joomla.Bootstrap.Initialise.Button(el));

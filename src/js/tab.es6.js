@@ -8,6 +8,11 @@ Joomla.Bootstrap.Instances.Tab = new WeakMap();
 
 const tabs= Joomla.getOptions('bootstrap.tab');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (tabs) {
   for (const tabSelector in tabs) {
     const nSelector = tabSelector.split('.')[1];

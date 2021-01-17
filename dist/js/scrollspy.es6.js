@@ -341,6 +341,11 @@ Joomla.Bootstrap.Initialise.Scrollspy = (el, options) => {
 
 const scrollspys = Joomla.getOptions('bootstrap.scrollspy');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (scrollspys) {
     Object.keys(scrollspys).map((scrollspy) => {
       const opt = scrollspys[scrollspy];

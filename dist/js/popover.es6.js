@@ -1083,11 +1083,11 @@ onDOMContentLoaded(() => {
 });
 
 Joomla = Joomla || {};
-window.Joomla.Bootstrap = window.Joomla.Bootstrap || {};
+Joomla.Bootstrap = Joomla.Bootstrap || {};
 Joomla.Bootstrap.Initialise = Joomla.Bootstrap.Initialise || {};
-window.Joomla.Bootstrap.Instances = window.Joomla.Bootstrap.Instances || {};
-window.Joomla.Bootstrap.Instances.Popover = new WeakMap();
-window.Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
+Joomla.Bootstrap.Instances = Joomla.Bootstrap.Instances || {};
+Joomla.Bootstrap.Instances.Popover = new WeakMap();
+Joomla.Bootstrap.Instances.Tooltip = new WeakMap();
 
 /**
  * Initialise the Popover iteractivity
@@ -1120,6 +1120,11 @@ Joomla.Bootstrap.Initialise.Tooltip = (el, options) => {
 
 const tooltips = Joomla.getOptions('bootstrap.tooltip');
 const popovers = Joomla.getOptions('bootstrap.popover');
+
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
 
 if (popovers) {
   Object.keys(popovers).forEach((popover) => {

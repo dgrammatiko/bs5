@@ -40,6 +40,11 @@ Joomla.Bootstrap.Initialise.Tooltip = (el, options) => {
 const tooltips = Joomla.getOptions('bootstrap.tooltip');
 const popovers = Joomla.getOptions('bootstrap.popover');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (popovers) {
   Object.keys(popovers).forEach((popover) => {
     const opt = popovers[popover];

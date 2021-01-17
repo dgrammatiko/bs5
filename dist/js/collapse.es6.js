@@ -429,6 +429,11 @@ Joomla.Bootstrap.Initialise.Collapse = (el, options) => {
 
 const collapses = { ...Joomla.getOptions('bootstrap.collapse'), ...Joomla.getOptions('bootstrap.accordion')};
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (collapses) {
   Object.keys(collapses).map((collapse) => {
     const opt = collapses[collapse];

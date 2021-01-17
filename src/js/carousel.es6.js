@@ -24,6 +24,11 @@ Joomla.Bootstrap.Initialise.Carousel = (el, options) => {
 
 const carousels = Joomla.getOptions('bootstrap.carousel');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (carousels) {
   Object.keys(carousels).forEach((carousel) => {
     const opt = carousels[carousel];

@@ -513,6 +513,11 @@ Joomla.Bootstrap.Initialise.Dropdown = (el, options) => {
 
 const dropdowns = Joomla.getOptions('bootstrap.dropdown');
 
+// Force Vanilla mode!
+if (!document.body.dataset.hasOwnProperty('bsNoJquery')) {
+  document.body.dataset.bsNoJquery = '';
+}
+
 if (dropdowns) {
   Object.keys(dropdowns).forEach((dropdown) => {
     const opt = dropdowns[dropdown];
