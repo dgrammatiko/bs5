@@ -1,4 +1,4 @@
-(function (exports) {
+var Bootstrap = (function (exports) {
   'use strict';
 
   var $ = require('../internals/export');
@@ -6633,7 +6633,7 @@
           idFieldArr[0] = idFieldArr[0].replace(/&quot;/g, '"');
 
           if (!document.getElementById(idFieldArr[1])) {
-            el = eval(idFieldArr[0]); // This is UNSAFE!!!!
+            el = new Function(idFieldArr[0]); // This is UNSAFE!!!!
           } else {
             el = document.getElementById(idFieldArr[1]).value;
           }

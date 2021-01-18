@@ -5,103 +5,46 @@ const { readdir, readFile, rename, writeFile, rm } = require('fs').promises;
 const {resolve} = require('path');
 const {minify} = require('terser');
 const rimraf = require('rimraf');
+const tasks = [];
 
-rimraf.sync('dist');
+const createMinified = async (file) => {
+  const initial = await readFile(resolve('dist/js', file), {encoding: 'utf8'});
+  const mini = await minify(initial);
+  await rename(resolve('dist/js', file), resolve(`dist/js/${file.split('-')[0]}.es6.js`));
+  await writeFile(resolve('dist/js', `${file.split('-')[0]}.es6.min.js`), mini.code, {encoding: 'utf8'});
+};
 
-const plugins = [
-nodeResolve(),
-replace({
-  'process.env.NODE_ENV': '\'production\''
-})
-];
-
-const bsPlugins = {
-  xxx: 'src/js/index.es6.js'
-}
-
-const getConfigByPluginKey = pluginKey => {
-
-  if (pluginKey === 'Dropdown' || pluginKey === 'Tooltip') {
-    return {
-      external: [
-        './dom/data.js',
-        './event-handler.js',
-        './dom/manipulator.js',
-        './selector-engine.js',
-        './util/index.js',
-        '@popperjs/core'
-      ],
-    }
-  }
-
-  if (pluginKey === 'Popover') {
-    return {
-      external: [
-        './base-component.js',
-        './dom/data.js',
-        './event-handler.js',
-        './dom/manipulator.js',
-        './selector-engine.js',
-        './util/index.js',
-      ],
-    }
-  }
-
-    return {
-      external: [
-        './dom/data.js',
-        './event-handler.js',
-        './dom/manipulator.js',
-        './selector-engine.js',
-        './util/index.js'
-      ],
-    }
-}
-
-
-const build = async plugin => {
-  console.log(`Building ${plugin} plugin...`)
-
-  const { external } = getConfigByPluginKey(plugin)
+const build = async _ => {
+  console.log(`Building ES6 Components...`)
 
   const bundle = await rollup.rollup({
-    input: bsPlugins[plugin],
-    plugins,
-    external,
+    input: 'src/js/index.es6.js',
+    plugins: [
+      nodeResolve(),
+      replace({
+        'process.env.NODE_ENV': '\'production\''
+      })
+    ],
+    external: [
+      './base-component.js',
+      './dom/data.js',
+      './event-handler.js',
+      './dom/manipulator.js',
+      './selector-engine.js',
+      './util/index.js',
+    ],
     manualChunks: {
-      'alert': [
-        'src/js/alert.es6.js'
-      ],
-      'button': [
-        'src/js/button.es6.js'
-      ],
-      'carousel': [
-        'src/js/carousel.es6.js'
-      ],
-      'collapse': [
-        'src/js/collapse.es6.js'
-      ],
-      'dropdown': [
-        'src/js/dropdown.es6.js'
-      ],
-      'modal': [
-        'src/js/modal.es6.js'
-      ],
-      'popover': [
-        'src/js/popover.es6.js'
-      ],
-      'scrollspy': [
-        'src/js/scrollspy.es6.js'
-      ],
-      'tab': [
-        'src/js/tab.es6.js'
-      ],
-      'toast': [
-        'src/js/toast.es6.js'
-      ],
-      'popper': [
-        '@popperjs/core'
-      ],
+      'alert': [ 'src/js/alert.es6.js', ],
+      'button': [ 'src/js/button.es6.js', ],
+      'carousel': [ 'src/js/carousel.es6.js', ],
+      'collapse': [ 'src/js/collapse.es6.js', ],
+      'dropdown': [ 'src/js/dropdown.es6.js', ],
+      'modal': [ 'src/js/modal.es6.js', ],
+      'popover': [ 'src/js/popover.es6.js', ],
+      'scrollspy': [ 'src/js/scrollspy.es6.js', ],
+      'tab': [ 'src/js/tab.es6.js', ],
+      'toast': [ 'src/js/toast.es6.js', ],
+      'popper': [ '@popperjs/core', ],
       'dom': [
         'node_modules/bootstrap/js/src/base-component.js',
         'node_modules/bootstrap/js/src/dom/data.js',
@@ -115,48 +58,28 @@ const build = async plugin => {
 
   await bundle.write({
     format: 'es',
-    name: plugin,
     sourcemap: false,
     dir: 'dist/js',
-  })
-
-  console.log(`Building ${plugin} plugin... Done!`)
+  });
 }
 
-const main = async () => {
+(async () => {
+  rimraf.sync('dist');
+
   try {
-    await Promise.all(Object.keys(bsPlugins).map(plugin => build(plugin)))
+    await build('src/js/index.es6.js');
+    await rm(resolve('dist/js/index.es6.js'));
   } catch (error) {
     console.error(error)
-
     process.exit(1)
   }
-}
 
-const addJoomlaCode = async (file) => {
-
-  const initial = await readFile(resolve('dist/js', file), {encoding: 'utf8'});
-  await rename(resolve('dist/js', file), resolve(`dist/js/${file.split('-')[0]}.es6.js`));
-
-  const mini = await minify(initial)
-
-  await writeFile(resolve('dist/js', `${file.split('-')[0]}.es6.min.js`), mini.code, {encoding: 'utf8'});
-};
-
-const finalise = async () => {
-  const files = await readdir('dist/js');
-  const tasks = [];
-  files.forEach(file => {
-    if (file.startsWith('dom-') || file.startsWith('popper-')) {
-      return;
+  (await readdir('dist/js')).forEach(file => {
+    if (!(file.startsWith('dom-') || file.startsWith('popper-'))) {
+      tasks.push(createMinified(file))
     }
-    tasks.push(addJoomlaCode(file))
-  })
+  });
 
   await Promise.all(tasks).catch(er => console.log(er));
-
-  await rm(resolve('dist/js/index.es6.js.es6.js'))
-  await rm(resolve('dist/js/index.es6.js.es6.min.js'))
-};
-
-main().then(() => finalise()).catch(err => console.log(err));
+  console.log(`ES6 components ready ✅`)
+})();

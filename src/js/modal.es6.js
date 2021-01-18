@@ -48,7 +48,7 @@ Joomla.Bootstrap.Initialise.Modal = (modal, options) => {
         idFieldArr[0] = idFieldArr[0].replace(/&quot;/g,'"');
 
         if (!document.getElementById(idFieldArr[1])) {
-          el = eval(idFieldArr[0]); // This is UNSAFE!!!!
+          el = new Function(idFieldArr[0]); // This is UNSAFE!!!!
         } else {
           el = document.getElementById(idFieldArr[1]).value;
         }

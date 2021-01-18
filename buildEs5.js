@@ -5,7 +5,7 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const replace = require('@rollup/plugin-replace');
 const { babel } = require('@rollup/plugin-babel');
 
-const build = async plugin => {
+const build = async _ => {
   console.log(`Building Legacy...`);
 
   const bundle = await rollup.rollup({
@@ -43,22 +43,20 @@ const build = async plugin => {
   await bundle.write({
     format: 'iife',
     sourcemap: false,
+    name: 'Bootstrap',
     file: 'dist/js/bootstrap.es5.js',
   })
-
-  console.log(`Building legacy... Done!`);
 }
 
 const main = async () => {
   try {
     await build('src/js/index.es6.js');
-
     const es5File = await readFile('dist/js/bootstrap.es5.js', {encoding: 'utf8'});
     const mini = await minify(es5File);
     await writeFile('dist/js/bootstrap.es5.min.js', mini.code, {encoding: 'utf8'});
+    console.log(`Legacy done! ✅`);
   } catch (error) {
     console.error(error);
-
     process.exit(1);
   }
 }
