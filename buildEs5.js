@@ -1,13 +1,12 @@
 const { readFile, writeFile } = require('fs').promises;
 const {minify} = require('terser');
-const rollup = require('rollup')
+const rollup = require('rollup');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const replace = require('@rollup/plugin-replace');
-const { babel } = require('@rollup/plugin-babel')
-
+const { babel } = require('@rollup/plugin-babel');
 
 const build = async plugin => {
-  console.log(`Building Legacy...`)
+  console.log(`Building Legacy...`);
 
   const bundle = await rollup.rollup({
     input: 'src/js/index.es6.js',
@@ -47,7 +46,7 @@ const build = async plugin => {
     file: 'dist/js/bootstrap.es5.js',
   })
 
-  console.log(`Building legacy... Done!`)
+  console.log(`Building legacy... Done!`);
 }
 
 const main = async () => {
@@ -58,9 +57,9 @@ const main = async () => {
     const mini = await minify(es5File);
     await writeFile('dist/js/bootstrap.es5.min.js', mini.code, {encoding: 'utf8'});
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
-    process.exit(1)
+    process.exit(1);
   }
 }
 
